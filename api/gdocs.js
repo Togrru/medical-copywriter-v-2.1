@@ -1,9 +1,9 @@
 const { requireAuth } = require('./_auth')
 
-// Extract Google Doc ID from various URL formats
 function extractDocId(url) {
   const patterns = [
     /\/document\/d\/([a-zA-Z0-9_-]+)/,
+    /\/d\/([a-zA-Z0-9_-]+)/,
     /id=([a-zA-Z0-9_-]+)/,
   ]
   for (const p of patterns) {
@@ -21,39 +21,52 @@ module.exports = async (req, res) => {
   if (!url) return res.status(400).json({ error: 'url обязателен' })
 
   const docId = extractDocId(url)
-  if (!docId) return res.status(400).json({ error: 'Не удалось извлечь ID документа из ссылки' })
+  if (!docId) return res.status(400).json({
+    error: 'Не удалось извлечь ID документа. Скопируйте ссылку прямо из адресной строки браузера.'
+  })
 
-  const exportUrl = `https://docs.google.com/document/d/${docId}/export?format=txt`
+  const attempts = [
+    `https://docs.google.com/document/d/${docId}/export?format=txt`,
+    `https://docs.google.com/feeds/download/documents/export/Export?id=${docId}&exportFormat=txt`,
+    `https://docs.google.com/document/d/${docId}/pub?output=text`,
+  ]
 
-  try {
-    const r = await fetch(exportUrl, {
-      headers: { 'User-Agent': 'Mozilla/5.0' },
-      redirect: 'follow',
-    })
+  const errors = []
 
-    if (r.status === 401 || r.status === 403) {
-      return res.status(403).json({
-        error: 'Документ закрыт. Откройте доступ: Файл → Настройки доступа → «Читатель» для всех с ссылкой',
+  for (const exportUrl of attempts) {
+    try {
+      const r = await fetch(exportUrl, {
+        headers: { 'User-Agent': 'Mozilla/5.0 (compatible; Googlebot/2.1)' },
+        redirect: 'follow',
       })
+
+      if (r.status === 200) {
+        const text = await r.text()
+        if (!text.trim()) {
+          return res.status(422).json({ error: 'Документ пустой' })
+        }
+        return res.json({
+          docId,
+          text: text.trim(),
+          length: text.trim().length,
+          preview: text.trim().slice(0, 300),
+        })
+      }
+
+      if (r.status === 401 || r.status === 403) {
+        return res.status(403).json({
+          error: 'Доступ закрыт. Откройте документ → Поделиться → «Читатель — все, у кого есть ссылка».'
+        })
+      }
+
+      errors.push(`${exportUrl.includes('pub') ? 'pub' : exportUrl.includes('feeds') ? 'feeds' : 'export'}: HTTP ${r.status}`)
+    } catch (e) {
+      errors.push(e.message)
     }
-
-    if (!r.ok) {
-      return res.status(502).json({ error: `Google вернул HTTP ${r.status}` })
-    }
-
-    const text = await r.text()
-    if (!text.trim()) {
-      return res.status(422).json({ error: 'Документ пустой или не удалось прочитать содержимое' })
-    }
-
-    res.json({
-      docId,
-      text: text.trim(),
-      length: text.trim().length,
-      preview: text.trim().slice(0, 300),
-    })
-
-  } catch (e) {
-    res.status(500).json({ error: e.message })
   }
+
+  return res.status(502).json({
+    error: 'Не удалось загрузить документ ни одним из методов.',
+    debug: errors,
+  })
 }
