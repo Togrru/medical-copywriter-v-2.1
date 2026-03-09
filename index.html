@@ -559,14 +559,43 @@ document.getElementById('logout-btn').addEventListener('click', logout)
 // ── Google Docs ────────────────────────────────────────────────────────────────
 async function fetchGdoc(url, onStatus) {
   onStatus('loading', '⟳ Загружаю документ...')
-  try {
-    const d = await api('/api/gdocs', {url})
-    onStatus('ok', `✓ Загружено ${d.length.toLocaleString()} символов`)
-    return d.text
-  } catch(e) {
-    onStatus('err', '✗ ' + e.message)
+
+  const patterns = [
+    /\/document\/d\/([a-zA-Z0-9_-]+)/,
+    /\/d\/([a-zA-Z0-9_-]+)/,
+  ]
+  let docId = null
+  for (const p of patterns) {
+    const m = url.match(p)
+    if (m) { docId = m[1]; break }
+  }
+  if (!docId) {
+    onStatus('err', '✗ Не удалось извлечь ID документа')
     return null
   }
+
+  const urls = [
+    `https://docs.google.com/document/d/${docId}/export?format=txt`,
+    `https://docs.google.com/document/d/${docId}/pub?output=text`,
+  ]
+
+  for (const exportUrl of urls) {
+    try {
+      const r = await fetch(exportUrl)
+      if (r.ok) {
+        const text = await r.text()
+        if (text.trim()) {
+          onStatus('ok', `✓ Загружено ${text.trim().length.toLocaleString()} символов`)
+          return text.trim()
+        }
+      }
+    } catch (e) {
+      // try next
+    }
+  }
+
+  onStatus('err', '✗ Не удалось загрузить. Убедитесь что документ открыт по ссылке, или опубликуйте его через Файл → Опубликовать в интернете')
+  return null
 }
 
 // Global doc
