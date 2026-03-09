@@ -5,6 +5,7 @@
 <title>МедКопирайтер</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <style>
 :root{
   --bg:#F1F5F2;--surf:#fff;--surf2:#EDF2EE;--border:#D5E3D9;
@@ -87,17 +88,13 @@ a{color:var(--g400)}
 .btn-add{width:100%;background:none;border:1.5px dashed var(--border);border-radius:var(--r);padding:7px;font-size:12px;color:var(--muted);transition:all var(--t)}
 .btn-add:hover{border-color:var(--g400);color:var(--g400)}
 
-/* Google Doc block */
-.gdoc-block{background:var(--surf2);border:1.5px solid var(--border);border-radius:var(--rl);padding:11px 12px}
-.gdoc-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:8px}
-.gdoc-row{display:flex;gap:6px}
-.gdoc-inp{flex:1;background:var(--surf);border:1.5px solid var(--border);border-radius:var(--r);padding:7px 10px;font-size:12px;color:var(--text);outline:none;transition:border-color var(--t)}
-.gdoc-inp:focus{border-color:var(--g400)}
-.gdoc-btn{background:var(--g400);border:none;border-radius:var(--r);padding:7px 11px;color:#fff;font-size:12px;font-weight:600;white-space:nowrap;transition:background var(--t)}
-.gdoc-btn:hover{background:var(--g500)}
-.gdoc-btn:disabled{opacity:.5;cursor:not-allowed}
-.gdoc-status{margin-top:7px;font-size:11px;display:flex;align-items:center;gap:5px}
-.gdoc-ok{color:var(--g400)}.gdoc-err{color:var(--red)}.gdoc-loading{color:var(--muted)}
+/* Excel upload block */
+.xl-block{background:var(--surf2);border:1.5px solid var(--border);border-radius:var(--rl);padding:11px 12px}
+.xl-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:8px}
+.xl-drop{border:2px dashed var(--border);border-radius:var(--r);padding:14px 10px;text-align:center;font-size:12px;color:var(--muted);cursor:pointer;transition:all var(--t)}
+.xl-drop:hover,.xl-drop.over{border-color:var(--g400);color:var(--g400);background:var(--g50)}
+.xl-status{margin-top:7px;font-size:11px}
+.xl-ok{color:var(--g400)}.xl-err{color:var(--red)}.xl-loading{color:var(--muted)}
 
 /* Thresholds */
 .acc-hdr{display:flex;align-items:center;gap:7px;background:none;border:none;width:100%;padding:7px 5px;font-size:11px;color:var(--sec);font-weight:600;border-radius:var(--r);transition:background var(--t)}
@@ -132,10 +129,7 @@ input[type=range]{width:100%;accent-color:var(--g400);height:4px}
 
 /* Task doc override */
 .task-doc-row{display:flex;gap:6px;align-items:center}
-.task-doc-inp{flex:1;background:var(--surf2);border:1.5px solid var(--border);border-radius:var(--r);padding:8px 11px;font-size:12px;color:var(--text);outline:none;transition:border-color var(--t)}
-.task-doc-inp:focus{border-color:var(--g400)}
-.task-doc-btn{background:none;border:1.5px solid var(--border);border-radius:var(--r);padding:8px 11px;font-size:11px;color:var(--sec);font-weight:600;white-space:nowrap;transition:all var(--t)}
-.task-doc-btn:hover{border-color:var(--g400);color:var(--g400)}
+
 .task-doc-status{margin-top:6px;font-size:11px}
 .task-doc-ok{color:var(--g400)}.task-doc-err{color:var(--red)}
 
@@ -275,16 +269,14 @@ input[type=range]{width:100%;accent-color:var(--g400);height:4px}
   <div class="layout">
     <!-- Sidebar -->
     <aside class="sidebar">
-      <!-- Global Google Doc -->
+      <!-- Global Excel TZ -->
       <div>
         <div class="sec-lbl">Общее ТЗ проекта</div>
-        <div class="gdoc-block" style="margin-top:6px">
-          <div class="gdoc-label">Google Docs ссылка</div>
-          <div class="gdoc-row">
-            <input class="gdoc-inp" id="gdoc-global-inp" placeholder="https://docs.google.com/..."/>
-            <button class="gdoc-btn" id="gdoc-global-btn">→</button>
-          </div>
-          <div class="gdoc-status" id="gdoc-global-status"></div>
+        <div class="xl-block" style="margin-top:6px">
+          <div class="xl-label">Excel файл (.xlsx)</div>
+          <div class="xl-drop" id="xl-global-drop">📎 Нажмите или перетащите файл</div>
+          <input type="file" id="xl-global-inp" accept=".xlsx,.xls,.csv" style="display:none"/>
+          <div class="xl-status" id="xl-global-status"></div>
         </div>
       </div>
 
@@ -328,17 +320,15 @@ input[type=range]{width:100%;accent-color:var(--g400);height:4px}
       <div class="panel on" id="tab-task">
         <div class="task-scroll">
 
-          <!-- Task-level Google Doc override -->
+          <!-- Task-level Excel TZ override -->
           <div class="card">
             <div class="card-hdr">
-              <span class="card-title">ТЗ задания (Google Docs)</span>
+              <span class="card-title">ТЗ задания (Excel)</span>
               <span id="task-doc-badge" style="font-size:11px;color:var(--muted)">не загружено</span>
             </div>
             <div class="card-body">
-              <div class="task-doc-row">
-                <input class="task-doc-inp" id="task-doc-inp" placeholder="Ссылка на Google Doc с ТЗ этого задания (необязательно)"/>
-                <button class="task-doc-btn" id="task-doc-btn">Загрузить</button>
-              </div>
+              <div class="xl-drop" id="xl-task-drop">📎 Нажмите или перетащите .xlsx файл</div>
+              <input type="file" id="xl-task-inp" accept=".xlsx,.xls,.csv" style="display:none"/>
               <div id="task-doc-status" style="margin-top:7px;font-size:11px"></div>
             </div>
           </div>
@@ -556,83 +546,83 @@ document.getElementById('eye').addEventListener('click', () => {
 })
 document.getElementById('logout-btn').addEventListener('click', logout)
 
-// ── Google Docs ────────────────────────────────────────────────────────────────
-async function fetchGdoc(url, onStatus) {
-  onStatus('loading', '⟳ Загружаю документ...')
-
-  const patterns = [
-    /\/document\/d\/([a-zA-Z0-9_-]+)/,
-    /\/d\/([a-zA-Z0-9_-]+)/,
-  ]
-  let docId = null
-  for (const p of patterns) {
-    const m = url.match(p)
-    if (m) { docId = m[1]; break }
-  }
-  if (!docId) {
-    onStatus('err', '✗ Не удалось извлечь ID документа')
-    return null
-  }
-
-  const urls = [
-    `https://docs.google.com/document/d/${docId}/export?format=txt`,
-    `https://docs.google.com/document/d/${docId}/pub?output=text`,
-  ]
-
-  for (const exportUrl of urls) {
-    try {
-      const r = await fetch(exportUrl)
-      if (r.ok) {
-        const text = await r.text()
-        if (text.trim()) {
-          onStatus('ok', `✓ Загружено ${text.trim().length.toLocaleString()} символов`)
-          return text.trim()
-        }
-      }
-    } catch (e) {
-      // try next
+// ── Excel upload (SheetJS, loaded from CDN) ───────────────────────────────────
+function parseExcel(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader()
+    reader.onload = e => {
+      try {
+        const XLSX = window.XLSX
+        if (!XLSX) return reject(new Error('SheetJS не загружен'))
+        const wb   = XLSX.read(e.target.result, { type: 'array' })
+        const parts = []
+        wb.SheetNames.forEach(name => {
+          const ws  = wb.Sheets[name]
+          const csv = XLSX.utils.sheet_to_csv(ws, { skipHidden: true })
+          if (csv.replace(/,/g,'').trim()) {
+            parts.push(`=== Лист: ${name} ===\n${csv}`)
+          }
+        })
+        resolve(parts.join('\n\n'))
+      } catch(e) { reject(e) }
     }
-  }
-
-  onStatus('err', '✗ Не удалось загрузить. Убедитесь что документ открыт по ссылке, или опубликуйте его через Файл → Опубликовать в интернете')
-  return null
+    reader.onerror = () => reject(new Error('Ошибка чтения файла'))
+    reader.readAsArrayBuffer(file)
+  })
 }
 
-// Global doc
-document.getElementById('gdoc-global-btn').addEventListener('click', async () => {
-  const url = document.getElementById('gdoc-global-inp').value.trim()
-  if (!url) return
-  const btn = document.getElementById('gdoc-global-btn')
-  btn.disabled = true
-  const text = await fetchGdoc(url, (type, msg) => {
-    const el = document.getElementById('gdoc-global-status')
-    el.className = 'gdoc-status gdoc-' + (type==='loading'?'loading':type==='ok'?'ok':'err')
-    el.textContent = msg
+function setupDropZone(dropId, inputId, onFile) {
+  const drop = document.getElementById(dropId)
+  const inp  = document.getElementById(inputId)
+  drop.addEventListener('click', () => inp.click())
+  inp.addEventListener('change', () => { if (inp.files[0]) onFile(inp.files[0]); inp.value='' })
+  drop.addEventListener('dragover', e => { e.preventDefault(); drop.classList.add('over') })
+  drop.addEventListener('dragleave', () => drop.classList.remove('over'))
+  drop.addEventListener('drop', e => { e.preventDefault(); drop.classList.remove('over'); if (e.dataTransfer.files[0]) onFile(e.dataTransfer.files[0]) })
+}
+
+async function handleExcel(file, statusId, dropId, onSuccess) {
+  const statusEl = document.getElementById(statusId)
+  const dropEl   = document.getElementById(dropId)
+  statusEl.className = 'xl-status xl-loading'
+  statusEl.textContent = '⟳ Читаю файл...'
+  try {
+    const text = await parseExcel(file)
+    if (!text.trim()) throw new Error('Файл пустой или не удалось прочитать')
+    const lines = text.split('\n').length
+    statusEl.className = 'xl-status xl-ok'
+    statusEl.textContent = `✓ ${file.name} — ${lines} строк`
+    dropEl.textContent = `📄 ${file.name}`
+    onSuccess(text)
+  } catch(e) {
+    statusEl.className = 'xl-status xl-err'
+    statusEl.textContent = '✗ ' + e.message
+  }
+}
+
+// Global TZ file
+setupDropZone('xl-global-drop', 'xl-global-inp', file => {
+  handleExcel(file, 'xl-global-status', 'xl-global-drop', text => {
+    S.globalDoc = { text, loaded: true }
+    addChatMsg('ai', `📊 Общее ТЗ загружено (${text.split('\n').length} строк). Теперь эти данные будут использоваться для всех заданий.`)
   })
-  if (text) { S.globalDoc = {url, text, loaded:true} }
-  btn.disabled = false
 })
 
-// Task doc
-document.getElementById('task-doc-btn').addEventListener('click', async () => {
-  const url = document.getElementById('task-doc-inp').value.trim()
-  if (!url) return
-  const btn = document.getElementById('task-doc-btn')
-  btn.disabled = true
-  const text = await fetchGdoc(url, (type, msg) => {
-    const el = document.getElementById('task-doc-status')
-    el.className = type==='ok' ? 'task-doc-ok' : type==='err' ? 'task-doc-err' : ''
-    el.textContent = msg
-    document.getElementById('task-doc-badge').textContent = type==='ok' ? '✓ загружено' : type==='err' ? '✗ ошибка' : '...'
-  })
-  if (text) {
-    S.taskDocs[S.activeId] = {url, text, loaded:true}
-    // Auto-confirm TZ in chat
-    addChatMsg('ai', '📄 ТЗ задания загружено. Нажмите «Подтвердить ТЗ» в чате чтобы я подтвердил что правильно всё понял.')
+// Task TZ file
+setupDropZone('xl-task-drop', 'xl-task-inp', file => {
+  const id = S.activeId
+  handleExcel(file, 'task-doc-status', 'xl-task-drop', text => {
+    S.taskDocs[id] = { text, loaded: true }
+    document.getElementById('task-doc-badge').textContent = '✓ загружено'
+    addChatMsg('ai', `📊 ТЗ задания загружено. Переключаюсь в чат для подтверждения...`)
     switchTab('chat')
     document.getElementById('chat-mode').value = 'confirm_tz'
-  }
-  btn.disabled = false
+    // Auto-send confirmation request
+    setTimeout(() => {
+      S.chatHistory = []
+      sendChatMessage('Прочитай загруженное ТЗ и подтверди что правильно понял его содержимое. Перечисли: заголовок/тему, тип текста, ключевые слова, объём, особые требования. Если чего-то не хватает — уточни.', 'confirm_tz')
+    }, 300)
+  })
 })
 
 // ── Tasks ─────────────────────────────────────────────────────────────────────
@@ -676,9 +666,9 @@ function loadForm(t) {
 
 function loadTaskDocUI() {
   const td = S.taskDocs[S.activeId]
-  document.getElementById('task-doc-inp').value = td?.url || ''
   document.getElementById('task-doc-status').textContent = ''
   document.getElementById('task-doc-badge').textContent = td?.loaded ? '✓ загружено' : 'не загружено'
+  document.getElementById('xl-task-drop').textContent = td?.loaded ? '📄 загружен' : '📎 Нажмите или перетащите .xlsx файл'
 }
 
 function renderTasks() {
@@ -926,9 +916,12 @@ async function sendChat() {
   const ta   = document.getElementById('chat-ta')
   const mode = document.getElementById('chat-mode').value
   const text = ta.value.trim(); if(!text) return
-
-  addChatMsg('user', text)
   ta.value=''; ta.style.height='auto'
+  await sendChatMessage(text, mode)
+}
+
+async function sendChatMessage(text, mode) {
+  addChatMsg('user', text)
   S.chatHistory.push({role:'user', content:text})
 
   const hint = document.getElementById('chat-hint')
