@@ -1,0 +1,12 @@
+{
+  "functions": {
+    "api/chat.js":          { "maxDuration": 60 },
+    "api/gdocs.js":         { "maxDuration": 15 },
+    "api/turgenev.js":      { "maxDuration": 30 },
+    "api/advego/submit.js": { "maxDuration": 30 },
+    "api/advego/check.js":  { "maxDuration": 30 }
+  },
+  "rewrites": [
+    { "source": "/((?!api/).*)", "destination": "/index.html" }
+  ]
+}
