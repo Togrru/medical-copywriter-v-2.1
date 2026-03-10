@@ -9,14 +9,15 @@
 <style>
 /* ── Tokens ──────────────────────────────────────────────────────────── */
 :root{
-  --bg:#F1F4F2; --surf:#fff; --surf2:#EDF2EE; --border:#D4E0D8;
-  --g50:#E5F2EA; --g100:#BDD9C7; --g400:#3C9954; --g500:#2F7A43; --g600:#235E33;
-  --text:#141E17; --sec:#3D5C47; --muted:#718F7D;
-  --red:#B83535; --red50:#FEF0F0;
-  --amber:#C47B06; --amber50:#FFF8EC;
-  --r:7px; --rl:13px; --rxl:18px;
-  --sh:0 1px 3px rgba(10,30,18,.06),0 3px 12px rgba(10,30,18,.04);
-  --shl:0 2px 8px rgba(10,30,18,.07),0 10px 36px rgba(10,30,18,.08);
+  --bg:#F0F4F1; --surf:#fff; --surf2:#EDF2EE; --surf3:#F7FAF8; --border:#D2DDD6;
+  --g50:#E4F1EA; --g100:#BBDAC7; --g400:#3A9852; --g500:#2D7A41; --g600:#1F5C2F;
+  --text:#111C16; --sec:#3A5444; --muted:#6D8C7C;
+  --red:#B63333; --red50:#FEF0F0; --red100:#FAD5D5;
+  --amber:#C07B06; --amber50:#FFF8EC;
+  --blue:#1A6FC4; --blue50:#EBF3FF;
+  --r:7px; --rl:12px; --rxl:16px;
+  --sh:0 1px 3px rgba(8,24,14,.05),0 2px 8px rgba(8,24,14,.04);
+  --shl:0 2px 10px rgba(8,24,14,.07),0 12px 40px rgba(8,24,14,.09);
   --t:.15s ease;
   --font:'Unbounded',sans-serif; --body:'Golos Text',sans-serif;
 }
@@ -28,222 +29,290 @@ input,select,textarea{font-family:var(--body)}
 ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-thumb{background:var(--border);border-radius:9px}
 a{color:var(--g400)}
 
-/* ── LOGIN ──────────────────────────────────────────────────────────── */
+/* ══ LOGIN ══════════════════════════════════════════════════════════════ */
 #pg-login{display:flex;align-items:center;justify-content:center;min-height:100vh;position:relative;overflow:hidden}
-.blob{position:absolute;border-radius:50%;filter:blur(100px);pointer-events:none}
-.blob1{width:600px;height:600px;background:radial-gradient(circle,rgba(60,153,84,.15),transparent);top:-180px;left:-180px}
-.blob2{width:500px;height:500px;background:radial-gradient(circle,rgba(47,122,67,.1),transparent);bottom:-120px;right:-120px}
-.lcard{position:relative;z-index:1;background:var(--surf);border:1.5px solid var(--border);border-radius:var(--rxl);padding:44px 40px;width:100%;max-width:400px;box-shadow:var(--shl);animation:fadeup .3s ease}
-@keyframes fadeup{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-.llogo{display:flex;align-items:center;gap:13px;margin-bottom:30px}
-.llogo-ic{width:46px;height:46px;background:linear-gradient(135deg,var(--g400),var(--g600));border-radius:var(--rl);display:flex;align-items:center;justify-content:center;color:#fff;font-size:22px;box-shadow:0 4px 14px rgba(47,122,67,.28)}
-.llogo-name{font-family:var(--font);font-size:13px;font-weight:700;letter-spacing:-.02em}
-.llogo-sub{font-size:11px;color:var(--muted);margin-top:2px}
-.lh{font-family:var(--font);font-size:19px;font-weight:700;letter-spacing:-.03em;margin-bottom:6px}
-.lsub{font-size:13px;color:var(--sec);margin-bottom:26px}
-.lf{display:flex;flex-direction:column;gap:5px;margin-bottom:12px}
+.blob{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none}
+.blob1{width:580px;height:580px;background:radial-gradient(circle,rgba(58,152,82,.14),transparent);top:-200px;left:-200px}
+.blob2{width:480px;height:480px;background:radial-gradient(circle,rgba(45,122,65,.1),transparent);bottom:-100px;right:-100px}
+.lcard{position:relative;z-index:1;background:var(--surf);border:1.5px solid var(--border);border-radius:var(--rxl);padding:42px 38px;width:100%;max-width:390px;box-shadow:var(--shl);animation:fadeup .28s ease}
+@keyframes fadeup{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.llogo{display:flex;align-items:center;gap:12px;margin-bottom:28px}
+.llogo-ic{width:44px;height:44px;background:linear-gradient(135deg,var(--g400),var(--g600));border-radius:var(--rl);display:flex;align-items:center;justify-content:center;color:#fff;font-size:20px;box-shadow:0 4px 14px rgba(45,122,65,.3)}
+.llogo-name{font-family:var(--font);font-size:12px;font-weight:700;letter-spacing:-.02em}
+.llogo-sub{font-size:10px;color:var(--muted);margin-top:2px}
+.lh{font-family:var(--font);font-size:18px;font-weight:700;letter-spacing:-.03em;margin-bottom:5px}
+.lsub{font-size:12px;color:var(--sec);margin-bottom:24px}
+.lf{display:flex;flex-direction:column;gap:4px;margin-bottom:11px}
 .lf label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
-.li{width:100%;background:var(--surf2);border:1.5px solid var(--border);border-radius:var(--r);padding:11px 13px;font-size:14px;color:var(--text);outline:none;transition:border-color var(--t),box-shadow var(--t)}
+.li{width:100%;background:var(--surf2);border:1.5px solid var(--border);border-radius:var(--r);padding:10px 12px;font-size:14px;color:var(--text);outline:none;transition:border-color var(--t),box-shadow var(--t)}
 .li:focus{border-color:var(--g400);box-shadow:0 0 0 3px var(--g50)}
-.pwr{position:relative}.pwr .li{padding-right:40px}
-.eye{position:absolute;right:11px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--muted);font-size:15px;transition:color var(--t)}
+.pwr{position:relative}.pwr .li{padding-right:38px}
+.eye{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--muted);font-size:14px;transition:color var(--t);padding:2px}
 .eye:hover{color:var(--g400)}
-.lerr{display:none;align-items:center;gap:7px;background:var(--red50);border:1.5px solid rgba(184,53,53,.2);border-radius:var(--r);padding:9px 13px;font-size:12px;color:var(--red);margin-bottom:12px}
+.lerr{display:none;align-items:center;gap:7px;background:var(--red50);border:1.5px solid var(--red100);border-radius:var(--r);padding:8px 12px;font-size:12px;color:var(--red);margin-bottom:11px}
 .lerr.show{display:flex}
-.btn-pri{width:100%;display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,var(--g400),var(--g600));border:none;border-radius:var(--r);padding:13px;font-family:var(--font);font-size:12px;font-weight:700;color:#fff;box-shadow:0 3px 12px rgba(47,122,67,.28);transition:all var(--t);letter-spacing:-.01em}
-.btn-pri:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 5px 18px rgba(47,122,67,.36)}
-.btn-pri:disabled{opacity:.5;cursor:not-allowed}
+.btn-pri{width:100%;display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,var(--g400),var(--g600));border:none;border-radius:var(--r);padding:12px;font-family:var(--font);font-size:11px;font-weight:700;color:#fff;box-shadow:0 3px 12px rgba(45,122,65,.28);transition:all var(--t);letter-spacing:-.01em}
+.btn-pri:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 5px 18px rgba(45,122,65,.36)}
+.btn-pri:disabled{opacity:.45;cursor:not-allowed}
 
-/* ── APP ──────────────────────────────────────────────────────────────── */
+/* ══ APP SHELL ══════════════════════════════════════════════════════════ */
 #pg-app{display:none;flex-direction:column;height:100vh}
 #pg-app.on{display:flex}
 
-/* Header */
-.hdr{height:52px;background:var(--surf);border-bottom:1.5px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 20px;box-shadow:var(--sh);flex-shrink:0;z-index:50}
-.hdr-logo{display:flex;align-items:center;gap:10px}
-.hdr-ic{width:32px;height:32px;background:linear-gradient(135deg,var(--g400),var(--g600));border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px}
-.hdr-name{font-family:var(--font);font-size:11px;font-weight:700;letter-spacing:-.02em}
-.hdr-sub{font-size:10px;color:var(--muted)}
-.hdr-r{display:flex;align-items:center;gap:8px}
-.hdr-badge{font-size:11px;color:var(--muted);background:var(--surf2);border:1.5px solid var(--border);border-radius:99px;padding:3px 10px}
-.ic-btn{width:32px;height:32px;background:var(--surf2);border:1.5px solid var(--border);border-radius:var(--r);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:14px;transition:all var(--t)}
-.ic-btn:hover{background:var(--red50);border-color:rgba(184,53,53,.25);color:var(--red)}
-.ic-btn.gear:hover{background:var(--g50);border-color:var(--g100);color:var(--g500)}
+.hdr{height:50px;background:var(--surf);border-bottom:1.5px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 18px;box-shadow:var(--sh);flex-shrink:0;z-index:50}
+.hdr-logo{display:flex;align-items:center;gap:9px}
+.hdr-ic{width:30px;height:30px;background:linear-gradient(135deg,var(--g400),var(--g600));border-radius:7px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px}
+.hdr-name{font-family:var(--font);font-size:10px;font-weight:700;letter-spacing:-.02em}
+.hdr-sub{font-size:9px;color:var(--muted)}
+.hdr-r{display:flex;align-items:center;gap:7px}
+.hdr-badge{font-size:10px;color:var(--muted);background:var(--surf2);border:1.5px solid var(--border);border-radius:99px;padding:2px 9px}
+.ic-btn{width:30px;height:30px;background:var(--surf2);border:1.5px solid var(--border);border-radius:var(--r);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px;transition:all var(--t)}
+.ic-btn:hover{background:var(--g50);border-color:var(--g100);color:var(--g500)}
+.ic-btn.danger:hover{background:var(--red50);border-color:var(--red100);color:var(--red)}
 
-/* Layout */
 .layout{display:flex;flex:1;overflow:hidden}
 
-/* ── SIDEBAR ──────────────────────────────────────────────────────────── */
-.sidebar{width:224px;min-width:224px;background:var(--surf);border-right:1.5px solid var(--border);display:flex;flex-direction:column;overflow-y:auto;padding:14px 10px;gap:14px}
-.s-section{display:flex;flex-direction:column;gap:6px}
-.s-lbl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);padding:0 3px}
+/* ══ SIDEBAR ════════════════════════════════════════════════════════════ */
+.sidebar{width:220px;min-width:220px;background:var(--surf);border-right:1.5px solid var(--border);display:flex;flex-direction:column;overflow-y:auto;padding:12px 9px;gap:12px}
+.s-sec{display:flex;flex-direction:column;gap:5px}
+.s-lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);padding:0 3px}
 
-/* Drop zone */
-.dropzone{border:2px dashed var(--border);border-radius:var(--r);padding:12px 10px;text-align:center;font-size:11px;color:var(--muted);cursor:pointer;transition:all var(--t);line-height:1.5}
+.dropzone{border:2px dashed var(--border);border-radius:var(--r);padding:10px 9px;text-align:center;font-size:11px;color:var(--muted);cursor:pointer;transition:all var(--t);line-height:1.4}
 .dropzone:hover,.dropzone.over{border-color:var(--g400);color:var(--g400);background:var(--g50)}
-.dz-status{font-size:10px;margin-top:5px;line-height:1.4}
-.dz-ok{color:var(--g400)}.dz-err{color:var(--red)}.dz-loading{color:var(--muted)}
+.dz-status{font-size:10px;margin-top:4px;line-height:1.4}
+.dz-ok{color:var(--g400)}.dz-err{color:var(--red)}.dz-info{color:var(--muted)}
 
-/* Task list */
 .task-list{display:flex;flex-direction:column;gap:3px}
-.ti{display:flex;align-items:center;justify-content:space-between;padding:7px 9px;border-radius:var(--r);cursor:pointer;border:1.5px solid transparent;transition:all var(--t);font-size:12px;gap:5px}
-.ti:hover{background:var(--surf2)}
-.ti.on{background:var(--g50);border-color:var(--g100)}
-.ti-inner{display:flex;align-items:center;gap:5px;flex:1;min-width:0}
+.ti{display:flex;align-items:center;justify-content:space-between;padding:7px 8px;border-radius:var(--r);cursor:pointer;border:1.5px solid transparent;transition:all var(--t);font-size:11px;gap:4px}
+.ti:hover{background:var(--surf2)}.ti.on{background:var(--g50);border-color:var(--g100)}
+.ti-inner{display:flex;align-items:center;gap:4px;flex:1;min-width:0}
+.ti-num{font-size:9px;color:var(--muted);flex-shrink:0;background:var(--surf2);border:1px solid var(--border);border-radius:4px;padding:1px 5px;font-weight:700}
+.ti.on .ti-num{background:var(--g400);border-color:var(--g400);color:#fff}
 .ti-name{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1}
-.ti-done{font-size:9px;color:var(--g400);font-weight:700;flex-shrink:0}
-.ti-spin{font-size:10px;color:var(--g400);animation:spin .8s linear infinite;flex-shrink:0}
-@keyframes spin{to{transform:rotate(360deg)}}
-.ti-rm{background:none;border:none;color:var(--muted);font-size:12px;padding:1px 4px;border-radius:4px;opacity:0;transition:opacity var(--t);flex-shrink:0}
-.ti:hover .ti-rm{opacity:1}
-.ti-rm:hover{color:var(--red)}
-.btn-add{width:100%;background:none;border:1.5px dashed var(--border);border-radius:var(--r);padding:6px;font-size:11px;color:var(--muted);transition:all var(--t)}
+.ti-tag{font-size:8px;font-weight:700;flex-shrink:0;border-radius:99px;padding:1px 5px}
+.ti-tag-done{background:var(--g50);color:var(--g400)}
+.ti-tag-spin{background:var(--surf2);color:var(--amber);animation:pulse 1.2s ease infinite}
+@keyframes pulse{0%,100%{opacity:.6}50%{opacity:1}}
+.ti-rm{background:none;border:none;color:var(--muted);font-size:11px;padding:1px 4px;border-radius:4px;opacity:0;transition:opacity var(--t);flex-shrink:0}
+.ti:hover .ti-rm{opacity:1}.ti-rm:hover{color:var(--red)}
+.btn-add{width:100%;background:none;border:1.5px dashed var(--border);border-radius:var(--r);padding:6px;font-size:10px;color:var(--muted);transition:all var(--t)}
 .btn-add:hover{border-color:var(--g400);color:var(--g400)}
 
-/* Thresholds accordion */
-.acc-hdr{display:flex;align-items:center;gap:6px;background:none;border:none;width:100%;padding:6px 5px;font-size:11px;color:var(--sec);font-weight:600;border-radius:var(--r);transition:background var(--t)}
+/* Thresholds */
+.acc-hdr{display:flex;align-items:center;gap:5px;background:none;border:none;width:100%;padding:5px 4px;font-size:10px;color:var(--sec);font-weight:700;border-radius:var(--r);transition:background var(--t)}
 .acc-hdr:hover{background:var(--surf2)}
-.acc-arr{margin-left:auto;font-size:9px;transition:transform var(--t)}
-.acc-arr.open{transform:rotate(180deg)}
-.acc-body{display:none;padding:6px 4px 2px}.acc-body.open{display:block}
-.sl-row{display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px}
+.acc-arr{margin-left:auto;font-size:8px;transition:transform var(--t)}.acc-arr.open{transform:rotate(180deg)}
+.acc-body{display:none;padding:4px 2px 2px}.acc-body.open{display:block}
+.sl-row{display:flex;justify-content:space-between;font-size:10px;margin-bottom:2px}
 .sl-val{font-weight:700;color:var(--g400)}
-.sl-hint{font-size:10px;color:var(--muted);margin-bottom:8px;margin-top:2px}
-input[type=range]{width:100%;accent-color:var(--g400);height:4px}
+.sl-hint{font-size:9px;color:var(--muted);margin-bottom:7px}
+input[type=range]{width:100%;accent-color:var(--g400);height:3px}
 
-/* ── MAIN ──────────────────────────────────────────────────────────────── */
-.main{flex:1;overflow-y:auto;padding:18px 20px;display:flex;flex-direction:column;gap:14px;min-width:0}
+/* ── Reference texts ── */
+.ref-list{display:flex;flex-direction:column;gap:3px;max-height:180px;overflow-y:auto}
+.ref-item{display:flex;align-items:center;gap:5px;padding:5px 7px;background:var(--surf2);border:1.5px solid var(--border);border-radius:var(--r);font-size:10px;transition:all var(--t)}
+.ref-item.active{background:var(--blue50);border-color:rgba(26,111,196,.3);color:var(--blue)}
+.ref-name{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ref-toggle{background:none;border:none;font-size:11px;color:var(--muted);padding:0 3px;transition:color var(--t)}
+.ref-toggle:hover{color:var(--g400)}
+.ref-rm{background:none;border:none;font-size:10px;color:var(--muted);padding:0 3px;transition:color var(--t);opacity:0}
+.ref-item:hover .ref-rm{opacity:1}.ref-rm:hover{color:var(--red)}
+.btn-ref-add{width:100%;background:none;border:1.5px dashed var(--border);border-radius:var(--r);padding:5px;font-size:10px;color:var(--muted);transition:all var(--t)}
+.btn-ref-add:hover{border-color:var(--blue);color:var(--blue)}
+.ref-hint{font-size:9px;color:var(--muted);line-height:1.45;padding:0 2px}
 
-/* Cards */
+/* ══ MAIN ═══════════════════════════════════════════════════════════════ */
+.main{flex:1;overflow-y:auto;padding:16px 18px;display:flex;flex-direction:column;gap:12px;min-width:0}
+
 .card{background:var(--surf);border:1.5px solid var(--border);border-radius:var(--rl);box-shadow:var(--sh);overflow:hidden}
-.card-hdr{display:flex;align-items:center;justify-content:space-between;padding:11px 16px;background:var(--surf2);border-bottom:1.5px solid var(--border)}
-.card-title{font-size:12px;font-weight:700;letter-spacing:-.01em}
-.card-body{padding:14px 16px}
+.card-hdr{display:flex;align-items:center;justify-content:space-between;padding:10px 15px;background:var(--surf2);border-bottom:1.5px solid var(--border)}
+.card-title{font-family:var(--font);font-size:11px;font-weight:700;letter-spacing:-.01em}
+.card-body{padding:13px 15px}
+.stage-num{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;background:var(--g400);color:#fff;border-radius:50%;font-size:9px;font-weight:700;margin-right:5px;flex-shrink:0}
+.stage-done .stage-num{background:var(--g100);color:var(--g500)}
 
-/* TZ card */
-.tz-row{display:flex;align-items:center;gap:10px}
-.tz-drop{flex:1}
-.tz-meta{font-size:11px;color:var(--muted);line-height:1.5}
-.tz-meta b{color:var(--text)}
-.tz-confirm{display:none;margin-top:10px;background:var(--g50);border:1.5px solid var(--g100);border-radius:var(--r);padding:10px 13px;font-size:12px;line-height:1.6;color:var(--sec);white-space:pre-wrap}
-.tz-confirm.show{display:block}
+/* ── TZ Upload card ── */
+.tz-upload-row{display:flex;gap:10px;align-items:flex-start}
+.tz-drop-wrap{flex:1}
+.tz-status-row{margin-top:8px;font-size:11px;color:var(--muted);display:flex;align-items:center;gap:8px}
+.btn-generate{display:flex;align-items:center;gap:7px;background:linear-gradient(135deg,var(--g400),var(--g600));border:none;border-radius:var(--r);padding:10px 20px;font-family:var(--font);font-size:11px;font-weight:700;color:#fff;box-shadow:0 3px 10px rgba(45,122,65,.26);transition:all var(--t);letter-spacing:-.01em;white-space:nowrap;align-self:flex-start;margin-top:0}
+.btn-generate:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 5px 16px rgba(45,122,65,.34)}
+.btn-generate:disabled{opacity:.4;cursor:not-allowed}
+.spin{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
+@keyframes spin{to{transform:rotate(360deg)}}
+.spin-g{border-color:var(--border);border-top-color:var(--g400)}
 
-/* Generate button */
-.btn-generate{display:flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--g400),var(--g600));border:none;border-radius:var(--r);padding:11px 22px;font-family:var(--font);font-size:12px;font-weight:700;color:#fff;box-shadow:0 3px 10px rgba(47,122,67,.26);transition:all var(--t);letter-spacing:-.01em}
-.btn-generate:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 5px 16px rgba(47,122,67,.34)}
-.btn-generate:disabled{opacity:.45;cursor:not-allowed}
+/* ── TZ Parsed card (Stage 2) ── */
+.tz-parsed{display:none}
+.tz-parsed.show{display:block}
 
-/* Output */
-.out-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:50px 20px;color:var(--muted);font-size:13px;text-align:center}
-.out-generating{display:flex;align-items:center;gap:10px;padding:40px 20px;color:var(--muted);justify-content:center;font-size:13px}
-.spin{width:18px;height:18px;border:2px solid var(--border);border-top-color:var(--g400);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
-.out-text{padding:16px;font-size:14px;line-height:1.85;white-space:pre-wrap;max-height:520px;overflow-y:auto;color:var(--text)}
+/* Row selector */
+.row-selector{display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--amber50);border:1.5px solid rgba(192,123,6,.25);border-radius:var(--r);margin-bottom:12px;font-size:12px}
+.row-selector label{color:var(--amber);font-weight:600;flex-shrink:0}
+.row-sel{background:var(--surf);border:1.5px solid rgba(192,123,6,.3);border-radius:var(--r);padding:4px 8px;font-size:12px;color:var(--text);outline:none;flex:1}
+.row-sel:focus{border-color:var(--amber)}
 
-/* Post-generation action panel */
-.action-panel{display:none;border-top:1.5px solid var(--border);background:var(--surf2);padding:14px 16px}
-.action-panel.show{display:block}
-.action-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:10px}
-.action-revise{display:flex;gap:8px;margin-bottom:12px}
-.action-ta{flex:1;background:var(--surf);border:1.5px solid var(--border);border-radius:var(--r);padding:9px 12px;font-size:13px;color:var(--text);outline:none;resize:none;transition:border-color var(--t),box-shadow var(--t);line-height:1.5}
-.action-ta:focus{border-color:var(--g400);box-shadow:0 0 0 3px var(--g50)}
-.btn-revise{display:flex;align-items:center;gap:6px;background:var(--surf);border:1.5px solid var(--border);border-radius:var(--r);padding:9px 15px;font-size:12px;font-weight:600;color:var(--sec);white-space:nowrap;align-self:flex-end;transition:all var(--t)}
-.btn-revise:hover:not(:disabled){border-color:var(--g400);color:var(--g400)}
-.btn-revise:disabled{opacity:.45;cursor:not-allowed}
-.action-divider{display:flex;align-items:center;gap:10px;margin-bottom:12px;font-size:11px;color:var(--muted)}
-.action-divider::before,.action-divider::after{content:'';flex:1;height:1px;background:var(--border)}
-.btn-verify{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:linear-gradient(135deg,var(--g400),var(--g600));border:none;border-radius:var(--r);padding:12px;font-family:var(--font);font-size:12px;font-weight:700;color:#fff;box-shadow:0 3px 10px rgba(47,122,67,.26);transition:all var(--t);letter-spacing:-.01em}
-.btn-verify:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 5px 16px rgba(47,122,67,.34)}
-.btn-verify:disabled{opacity:.45;cursor:not-allowed}
+/* TZ params grid */
+.tz-params{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.tz-param{background:var(--surf3);border:1.5px solid var(--border);border-radius:var(--r);padding:8px 10px}
+.tz-param-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:3px}
+.tz-param-val{font-size:12px;font-weight:600;color:var(--text)}
+.tz-param.span2{grid-column:span 2}
 
-/* Log */
-.log-card{background:var(--surf);border:1.5px solid var(--border);border-radius:var(--rl);padding:12px 16px;font-size:11px;color:var(--sec);max-height:160px;overflow-y:auto;display:none}
-.log-line{padding:2px 0;display:flex;gap:7px;line-height:1.5}
-.log-dot{color:var(--g400);font-weight:700;flex-shrink:0}
-.log-err{color:var(--red)}
+/* Keywords table */
+.kw-section{margin-bottom:12px}
+.kw-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.kw-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--sec)}
+.kw-count{font-size:10px;color:var(--muted)}
+.kw-table{width:100%;border-collapse:collapse;font-size:11px}
+.kw-table th{text-align:left;padding:4px 8px;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);border-bottom:1.5px solid var(--border)}
+.kw-table td{padding:4px 8px;border-bottom:1px solid var(--surf2);vertical-align:top}
+.kw-table tr:last-child td{border:none}
+.kw-table tr:hover td{background:var(--surf3)}
+.kw-freq{font-weight:700;color:var(--g400);text-align:center}
+.lsi-cloud{display:flex;flex-wrap:wrap;gap:4px}
+.lsi-tag{background:var(--surf2);border:1.5px solid var(--border);border-radius:99px;padding:2px 8px;font-size:10px;color:var(--sec);transition:all var(--t)}
+.lsi-tag:hover{background:var(--g50);border-color:var(--g100);color:var(--g500)}
 
-/* Output header buttons */
+/* Clarification box */
+.clarify-wrap{background:var(--blue50);border:1.5px solid rgba(26,111,196,.2);border-radius:var(--r);padding:12px;margin-top:12px}
+.clarify-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--blue);margin-bottom:6px;display:flex;align-items:center;gap:5px}
+.clarify-ta{width:100%;background:var(--surf);border:1.5px solid rgba(26,111,196,.25);border-radius:var(--r);padding:8px 10px;font-size:12px;color:var(--text);outline:none;resize:none;line-height:1.55;transition:border-color var(--t)}
+.clarify-ta:focus{border-color:var(--blue)}
+.clarify-hint{font-size:10px;color:rgba(26,111,196,.7);margin-top:4px}
+
+/* ── Output card ── */
+.out-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;padding:44px 20px;color:var(--muted);font-size:12px;text-align:center}
+.out-generating{display:flex;align-items:center;gap:10px;padding:36px 20px;color:var(--muted);justify-content:center;font-size:12px}
+.out-text{padding:16px;font-size:14px;line-height:1.9;white-space:pre-wrap;max-height:560px;overflow-y:auto;color:var(--text)}
 .out-actions{display:flex;align-items:center;gap:6px}
-.btn-sm{display:flex;align-items:center;gap:4px;background:none;border:1.5px solid var(--border);border-radius:var(--r);padding:4px 10px;font-size:11px;color:var(--sec);transition:all var(--t)}
+.iter-tag{font-size:9px;color:var(--muted);background:var(--surf2);border:1.5px solid var(--border);border-radius:99px;padding:2px 8px}
+.btn-sm{display:flex;align-items:center;gap:4px;background:none;border:1.5px solid var(--border);border-radius:var(--r);padding:3px 9px;font-size:10px;color:var(--sec);transition:all var(--t)}
 .btn-sm:hover{border-color:var(--g400);color:var(--g400)}
-.iter-tag{font-size:10px;color:var(--muted);background:var(--surf);border:1.5px solid var(--border);border-radius:99px;padding:2px 9px}
 
-/* ── RIGHT PANEL ──────────────────────────────────────────────────────── */
-.rpanel{width:214px;min-width:214px;background:var(--surf);border-left:1.5px solid var(--border);padding:14px 12px;overflow-y:auto;display:flex;flex-direction:column;gap:12px}
-.rp-title{font-family:var(--font);font-size:11px;font-weight:700;letter-spacing:-.01em}
-.vblock{background:var(--surf2);border:1.5px solid var(--border);border-radius:var(--rl);padding:12px}
-.vlabel{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:9px}
-.ring-wrap{position:relative;width:66px;height:66px;margin:0 auto 7px}
-.ring-svg{width:66px;height:66px;transform:rotate(-90deg)}
-.ring-bg{fill:none;stroke:var(--border);stroke-width:6}
-.ring-fg{fill:none;stroke-width:6;stroke-linecap:round;transition:stroke-dashoffset .5s ease,stroke .3s}
-.ring-val{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--font);font-size:15px;font-weight:700}
-.ring-sub{text-align:center;font-size:10px;color:var(--muted);margin-bottom:7px}
-.vrow{display:flex;justify-content:space-between;font-size:11px;padding:3px 0;border-bottom:1px solid var(--border)}
+/* ── Action panel (post-gen) ── */
+.action-panel{display:none;border-top:1.5px solid var(--border);background:var(--surf3)}
+.action-panel.show{display:block}
+.action-inner{padding:13px 15px}
+.action-section{margin-bottom:14px}
+.action-section:last-child{margin-bottom:0}
+.action-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:8px;display:flex;align-items:center;gap:5px}
+.action-row{display:flex;gap:8px}
+.action-ta{flex:1;background:var(--surf);border:1.5px solid var(--border);border-radius:var(--r);padding:8px 11px;font-size:12px;color:var(--text);outline:none;resize:none;transition:border-color var(--t),box-shadow var(--t);line-height:1.5}
+.action-ta:focus{border-color:var(--g400);box-shadow:0 0 0 3px var(--g50)}
+.btn-revise{display:flex;align-items:center;gap:5px;background:var(--surf);border:1.5px solid var(--border);border-radius:var(--r);padding:8px 14px;font-size:11px;font-weight:600;color:var(--sec);white-space:nowrap;align-self:flex-end;transition:all var(--t)}
+.btn-revise:hover:not(:disabled){border-color:var(--g400);color:var(--g400);background:var(--g50)}
+.btn-revise:disabled{opacity:.4;cursor:not-allowed}
+.action-divider{display:flex;align-items:center;gap:9px;font-size:10px;color:var(--muted);margin:14px 0}
+.action-divider::before,.action-divider::after{content:'';flex:1;height:1px;background:var(--border)}
+.btn-verify{display:flex;align-items:center;justify-content:center;gap:7px;width:100%;background:linear-gradient(135deg,var(--g400),var(--g600));border:none;border-radius:var(--r);padding:11px;font-family:var(--font);font-size:11px;font-weight:700;color:#fff;box-shadow:0 3px 10px rgba(45,122,65,.26);transition:all var(--t);letter-spacing:-.01em}
+.btn-verify:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 5px 16px rgba(45,122,65,.34)}
+.btn-verify:disabled{opacity:.4;cursor:not-allowed}
+
+/* ── Log ── */
+.log-wrap{background:var(--surf);border:1.5px solid var(--border);border-radius:var(--rl);overflow:hidden;display:none}
+.log-hdr{display:flex;align-items:center;justify-content:space-between;padding:7px 12px;background:var(--surf2);border-bottom:1.5px solid var(--border)}
+.log-hdr-title{font-size:10px;font-weight:700;color:var(--muted)}
+.log-hdr-clear{background:none;border:none;font-size:10px;color:var(--muted);padding:1px 4px;border-radius:4px;transition:color var(--t)}
+.log-hdr-clear:hover{color:var(--red)}
+.log-body{padding:8px 12px;font-size:10px;color:var(--sec);max-height:130px;overflow-y:auto}
+.log-line{padding:2px 0;display:flex;gap:6px;line-height:1.5}
+.log-dot{color:var(--g400);font-weight:700;flex-shrink:0}
+.log-err{color:var(--red)}.log-warn{color:var(--amber)}
+
+/* ══ RIGHT PANEL ════════════════════════════════════════════════════════ */
+.rpanel{width:210px;min-width:210px;background:var(--surf);border-left:1.5px solid var(--border);padding:13px 11px;overflow-y:auto;display:flex;flex-direction:column;gap:10px}
+.rp-title{font-family:var(--font);font-size:10px;font-weight:700;letter-spacing:-.01em;color:var(--text)}
+.vblock{background:var(--surf2);border:1.5px solid var(--border);border-radius:var(--rl);padding:11px;flex-shrink:0}
+.vlabel{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:8px}
+.ring-wrap{position:relative;width:62px;height:62px;margin:0 auto 6px}
+.ring-svg{width:62px;height:62px;transform:rotate(-90deg)}
+.ring-bg{fill:none;stroke:var(--border);stroke-width:5.5}
+.ring-fg{fill:none;stroke-width:5.5;stroke-linecap:round;transition:stroke-dashoffset .5s ease,stroke .3s}
+.ring-val{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--font);font-size:14px;font-weight:700}
+.ring-sub{text-align:center;font-size:10px;color:var(--muted);margin-bottom:6px}
+.vrow{display:flex;justify-content:space-between;font-size:10px;padding:3px 0;border-bottom:1px solid var(--surf3)}
 .vrow:last-child{border:none}
-.vrow span:last-child{font-weight:600}
-.vdot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:4px}
+.vrow span:last-child{font-weight:700}
+.vdot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:3px}
 .dg{background:var(--g400)}.da{background:var(--amber)}.dr{background:var(--red)}
-.vwait{font-size:11px;color:var(--muted);text-align:center;padding:12px 0}
-.vloading{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--muted);padding:7px 0}
-.verr{font-size:11px;color:var(--red);padding:8px 0;line-height:1.4}
+.vwait{font-size:10px;color:var(--muted);text-align:center;padding:10px 0}
+.vloading{display:flex;align-items:center;gap:6px;font-size:10px;color:var(--muted);padding:6px 0}
+.verr{font-size:10px;color:var(--red);padding:7px 0;line-height:1.4}
 
-/* ── SETTINGS MODAL ────────────────────────────────────────────────────── */
-.overlay{position:fixed;inset:0;background:rgba(10,25,16,.42);z-index:200;display:none;align-items:center;justify-content:center;padding:20px}
+/* ══ SETTINGS MODAL ═════════════════════════════════════════════════════ */
+.overlay{position:fixed;inset:0;background:rgba(8,22,13,.44);z-index:200;display:none;align-items:center;justify-content:center;padding:18px}
 .overlay.on{display:flex}
-.modal{background:var(--surf);border:1.5px solid var(--border);border-radius:var(--rxl);padding:28px;width:100%;max-width:520px;box-shadow:var(--shl);animation:fadeup .22s ease;max-height:85vh;overflow-y:auto}
-.modal-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.modal{background:var(--surf);border:1.5px solid var(--border);border-radius:var(--rxl);padding:26px;width:100%;max-width:560px;box-shadow:var(--shl);animation:fadeup .2s ease;max-height:90vh;overflow-y:auto}
+.modal-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
 .modal-title{font-family:var(--font);font-size:13px;font-weight:700;letter-spacing:-.02em}
-.modal-close{background:none;border:none;color:var(--muted);font-size:20px;padding:2px;transition:color var(--t)}
+.modal-close{background:none;border:none;color:var(--muted);font-size:19px;padding:2px;transition:color var(--t);line-height:1}
 .modal-close:hover{color:var(--text)}
-.mf{display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
-.mf label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
-.mi,.ms{width:100%;background:var(--surf2);border:1.5px solid var(--border);border-radius:var(--r);padding:10px 12px;font-size:13px;color:var(--text);outline:none;transition:border-color var(--t)}
+.mf{display:flex;flex-direction:column;gap:4px;margin-bottom:13px}
+.mf label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+.mi,.ms{width:100%;background:var(--surf2);border:1.5px solid var(--border);border-radius:var(--r);padding:9px 11px;font-size:12px;color:var(--text);outline:none;transition:border-color var(--t)}
 .mi:focus,.ms:focus{border-color:var(--g400)}
-.mta{width:100%;background:var(--surf2);border:1.5px solid var(--border);border-radius:var(--r);padding:10px 12px;font-size:12px;color:var(--text);outline:none;resize:vertical;line-height:1.65;transition:border-color var(--t)}
+.mta{width:100%;background:var(--surf2);border:1.5px solid var(--border);border-radius:var(--r);padding:9px 11px;font-size:11px;color:var(--text);outline:none;resize:vertical;line-height:1.65;transition:border-color var(--t)}
 .mta:focus{border-color:var(--g400)}
-.mdivider{height:1px;background:var(--border);margin:16px 0}
-.mhint{font-size:11px;color:var(--muted);line-height:1.5;margin-bottom:14px}
-.msave{display:flex;align-items:center;justify-content:center;gap:7px;background:linear-gradient(135deg,var(--g400),var(--g600));border:none;border-radius:var(--r);padding:12px;font-family:var(--font);font-size:12px;font-weight:700;color:#fff;width:100%;transition:all var(--t)}
-.msave:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(47,122,67,.3)}
-.msaved{text-align:center;font-size:11px;color:var(--g400);margin-top:8px;display:none}
+.mdivider{height:1px;background:var(--border);margin:14px 0}
+.mhint{font-size:10px;color:var(--muted);line-height:1.5;margin-bottom:11px;padding:7px 10px;background:var(--surf2);border-radius:var(--r);border-left:3px solid var(--g400)}
+.msave{display:flex;align-items:center;justify-content:center;gap:6px;background:linear-gradient(135deg,var(--g400),var(--g600));border:none;border-radius:var(--r);padding:11px;font-family:var(--font);font-size:11px;font-weight:700;color:#fff;width:100%;transition:all var(--t)}
+.msave:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(45,122,65,.3)}
+.msaved{text-align:center;font-size:10px;color:var(--g400);margin-top:7px;display:none}
 .msaved.on{display:block}
+.model-group-label{font-size:9px;font-weight:700;text-transform:uppercase;color:var(--muted);letter-spacing:.07em}
 
-@media(max-width:900px){.rpanel{display:none}}
-@media(max-width:620px){.sidebar{display:none}}
+/* ══ REF TEXT MODAL ════════════════════════════════════════════════════ */
+#ref-overlay{position:fixed;inset:0;background:rgba(8,22,13,.44);z-index:300;display:none;align-items:center;justify-content:center;padding:18px}
+#ref-overlay.on{display:flex}
+.ref-modal{background:var(--surf);border:1.5px solid var(--border);border-radius:var(--rxl);padding:24px;width:100%;max-width:640px;box-shadow:var(--shl);animation:fadeup .2s ease;display:flex;flex-direction:column;gap:12px}
+.ref-mf{display:flex;flex-direction:column;gap:4px}
+.ref-mf label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+.ref-mi{width:100%;background:var(--surf2);border:1.5px solid var(--border);border-radius:var(--r);padding:8px 10px;font-size:12px;color:var(--text);outline:none;transition:border-color var(--t)}
+.ref-mi:focus{border-color:var(--blue)}
+.ref-mta{width:100%;background:var(--surf2);border:1.5px solid var(--border);border-radius:var(--r);padding:9px 10px;font-size:12px;color:var(--text);outline:none;resize:vertical;line-height:1.65;transition:border-color var(--t)}
+.ref-mta:focus{border-color:var(--blue)}
+.ref-save{display:flex;align-items:center;justify-content:center;gap:6px;background:linear-gradient(135deg,var(--blue),#1555A0);border:none;border-radius:var(--r);padding:11px;font-family:var(--font);font-size:11px;font-weight:700;color:#fff;width:100%;transition:all var(--t)}
+.ref-save:hover{transform:translateY(-1px)}
+.ref-row{display:flex;gap:8px}
+.ref-row .ref-mf{flex:1}
+
+@media(max-width:860px){.rpanel{display:none}}
+@media(max-width:580px){.sidebar{display:none}}
 </style>
 </head>
 <body>
 
-<!-- ══ LOGIN ═══════════════════════════════════════════════════════════════ -->
+<!-- ══ LOGIN ══════════════════════════════════════════════════════════════ -->
 <div id="pg-login">
   <div class="blob blob1"></div><div class="blob blob2"></div>
   <div class="lcard">
     <div class="llogo">
       <div class="llogo-ic">✚</div>
-      <div><div class="llogo-name">МедКопирайтер</div><div class="llogo-sub">инструмент клиники</div></div>
+      <div><div class="llogo-name">МедКопирайтер</div><div class="llogo-sub">AI · Тургенев · Advego</div></div>
     </div>
     <h1 class="lh">Добро пожаловать</h1>
-    <p class="lsub">Войдите чтобы продолжить</p>
+    <p class="lsub">Войдите чтобы продолжить работу</p>
     <div class="lf"><label>Имя пользователя</label><input class="li" id="lu" type="text" placeholder="admin" autocomplete="username"/></div>
     <div class="lf"><label>Пароль</label>
-      <div class="pwr"><input class="li" id="lp" type="password" placeholder="••••••••" autocomplete="current-password"/><button class="eye" id="eye" type="button">👁</button></div>
+      <div class="pwr"><input class="li" id="lp" type="password" placeholder="••••••••" autocomplete="current-password"/><button class="eye" id="eye">👁</button></div>
     </div>
     <div class="lerr" id="lerr"></div>
     <button class="btn-pri" id="lbtn">Войти →</button>
   </div>
 </div>
 
-<!-- ══ APP ═════════════════════════════════════════════════════════════════ -->
+<!-- ══ APP ════════════════════════════════════════════════════════════════ -->
 <div id="pg-app">
   <header class="hdr">
     <div class="hdr-logo">
       <div class="hdr-ic">✚</div>
-      <div><div class="hdr-name">МедКопирайтер</div><div class="hdr-sub">AI · Тургенев · Advego</div></div>
+      <div><div class="hdr-name">МедКопирайтер</div><div class="hdr-sub">meddynasty.ru</div></div>
     </div>
     <div class="hdr-r">
       <span class="hdr-badge" id="ubadge"></span>
-      <button class="ic-btn gear" id="gear-btn" title="Настройки">⚙</button>
-      <button class="ic-btn" id="logout-btn" title="Выйти">⎋</button>
+      <button class="ic-btn" id="gear-btn" title="Настройки">⚙</button>
+      <button class="ic-btn danger" id="logout-btn" title="Выйти">⎋</button>
     </div>
   </header>
 
@@ -252,23 +321,30 @@ input[type=range]{width:100%;accent-color:var(--g400);height:4px}
     <!-- ── Sidebar ── -->
     <aside class="sidebar">
 
-      <div class="s-section">
+      <div class="s-sec">
         <div class="s-lbl">Общее ТЗ проекта</div>
         <div class="dropzone" id="dz-global">📎 Загрузить Excel (.xlsx)</div>
         <input type="file" id="fi-global" accept=".xlsx,.xls,.csv" style="display:none"/>
-        <div class="dz-status" id="dz-global-status"></div>
+        <div class="dz-status dz-info" id="dz-global-st"></div>
       </div>
 
-      <div class="s-section">
+      <div class="s-sec">
         <div class="s-lbl">Задания</div>
         <div class="task-list" id="task-list"></div>
-        <button class="btn-add" id="add-btn">+ добавить задание</button>
+        <button class="btn-add" id="add-btn">+ новое задание</button>
       </div>
 
-      <div class="s-section">
+      <div class="s-sec">
+        <!-- Reference texts -->
+        <div class="s-lbl">Эталонные тексты</div>
+        <div class="ref-hint">Верифицированные тексты-образцы. Активные подключаются к промпту как примеры стиля.</div>
+        <div class="ref-list" id="ref-list"></div>
+        <button class="btn-ref-add" id="ref-add-btn">+ добавить эталон</button>
+      </div>
+
+      <div class="s-sec">
         <button class="acc-hdr" id="acc-btn">
-          ⚙ Параметры проверки
-          <span class="acc-arr" id="acc-arr">▼</span>
+          ⚙ Параметры проверки <span class="acc-arr" id="acc-arr">▼</span>
         </button>
         <div class="acc-body" id="acc-body">
           <div>
@@ -282,9 +358,8 @@ input[type=range]{width:100%;accent-color:var(--g400);height:4px}
             <div class="sl-hint">По фразам (основной показатель)</div>
           </div>
           <div>
-            <div class="sl-row"><span>Макс. итераций авто-рефайна</span><span class="sl-val" id="il">3</span></div>
+            <div class="sl-row"><span>Макс. итераций</span><span class="sl-val" id="il">3</span></div>
             <input type="range" id="is2" min="1" max="5" value="3"/>
-            <div class="sl-hint">При авто-перегенерации</div>
           </div>
         </div>
       </div>
@@ -294,27 +369,48 @@ input[type=range]{width:100%;accent-color:var(--g400);height:4px}
     <!-- ── Main ── -->
     <main class="main">
 
-      <!-- ТЗ задания -->
-      <div class="card">
+      <!-- ═ STEP 1: Upload TZ ═ -->
+      <div class="card" id="card-upload">
         <div class="card-hdr">
-          <span class="card-title">ТЗ задания</span>
-          <span id="tz-badge" style="font-size:11px;color:var(--muted)">не загружено</span>
+          <span class="card-title"><span class="stage-num" id="sn1">1</span>ТЗ задания</span>
+          <span id="tz-badge" style="font-size:10px;color:var(--muted)">не загружено</span>
         </div>
         <div class="card-body">
-          <div class="tz-row">
-            <div class="dropzone tz-drop" id="dz-task">📎 Нажмите или перетащите .xlsx файл с ТЗ</div>
-            <input type="file" id="fi-task" accept=".xlsx,.xls,.csv" style="display:none"/>
-            <button class="btn-generate" id="gen-btn" disabled>▶ Генерировать</button>
+          <div class="tz-upload-row">
+            <div class="tz-drop-wrap">
+              <div class="dropzone" id="dz-task">📎 Перетащите или нажмите — загрузите Excel .xlsx с ТЗ задания</div>
+              <input type="file" id="fi-task" accept=".xlsx,.xls,.csv" style="display:none"/>
+              <div class="dz-status" id="dz-task-st"></div>
+            </div>
+            <button class="btn-generate" id="gen-btn" disabled>
+              <span id="gen-icon">▶</span> Генерировать
+            </button>
           </div>
-          <div class="dz-status" id="dz-task-status" style="margin-top:8px"></div>
-          <div class="tz-confirm" id="tz-confirm"></div>
         </div>
       </div>
 
-      <!-- Результат -->
-      <div class="card" id="out-card">
+      <!-- ═ STEP 2: Parsed TZ ═ -->
+      <div class="card tz-parsed" id="card-parsed">
         <div class="card-hdr">
-          <span class="card-title">Сгенерированный текст</span>
+          <span class="card-title"><span class="stage-num" id="sn2">2</span>Разбор ТЗ</span>
+          <div style="display:flex;align-items:center;gap:7px">
+            <span id="parsed-badge" style="font-size:10px;color:var(--muted)"></span>
+            <button class="btn-sm" id="re-upload-btn">↺ Загрузить другой</button>
+          </div>
+        </div>
+        <div class="card-body" id="parsed-body">
+          <!-- row selector injected here if needed -->
+          <!-- params grid -->
+          <!-- keywords table -->
+          <!-- lsi cloud -->
+          <!-- clarification textarea -->
+        </div>
+      </div>
+
+      <!-- ═ STEP 3: Output ═ -->
+      <div class="card" id="card-output">
+        <div class="card-hdr">
+          <span class="card-title"><span class="stage-num" id="sn3">3</span>Сгенерированный текст</span>
           <div class="out-actions">
             <span class="iter-tag" id="iter-tag" style="display:none"></span>
             <button class="btn-sm" id="copy-btn" style="display:none">⎘ Копировать</button>
@@ -324,20 +420,35 @@ input[type=range]{width:100%;accent-color:var(--g400);height:4px}
           <div class="out-empty">📝<br>Загрузите ТЗ и нажмите «Генерировать»</div>
         </div>
 
-        <!-- Панель действий — появляется после генерации -->
+        <!-- Post-gen action panel -->
         <div class="action-panel" id="action-panel">
-          <div class="action-title">Что делаем с текстом?</div>
-          <div class="action-revise">
-            <textarea class="action-ta" id="revise-ta" rows="2" placeholder="Опишите что переработать: «сделай введение живее», «замени клише в 3-м абзаце», «увеличь объём на 500 знаков»..."></textarea>
-            <button class="btn-revise" id="revise-btn">↺ Переработать</button>
+          <div class="action-inner">
+            <div class="action-section">
+              <div class="action-label">💬 Доработать текст</div>
+              <div class="action-row">
+                <textarea class="action-ta" id="revise-ta" rows="2"
+                  placeholder="Опишите правки: «сделай введение живее», «замени клише в абзаце 3», «добавь 300 знаков к разделу Заболевания»..."></textarea>
+                <button class="btn-revise" id="revise-btn">↺ Переработать</button>
+              </div>
+            </div>
+            <div class="action-divider">или текст готов</div>
+            <div class="action-section">
+              <button class="btn-verify" id="verify-btn">
+                ✓ Отправить на проверку в Тургенев + Advego
+              </button>
+            </div>
           </div>
-          <div class="action-divider">или текст готов</div>
-          <button class="btn-verify" id="verify-btn">✓ Начать проверку в Тургенев + Advego</button>
         </div>
       </div>
 
-      <!-- Лог -->
-      <div class="log-card" id="log-card"></div>
+      <!-- Log -->
+      <div class="log-wrap" id="log-wrap">
+        <div class="log-hdr">
+          <span class="log-hdr-title">▸ Лог операций</span>
+          <button class="log-hdr-clear" id="log-clear-btn">✕ очистить</button>
+        </div>
+        <div class="log-body" id="log-body"></div>
+      </div>
 
     </main>
 
@@ -346,63 +457,128 @@ input[type=range]{width:100%;accent-color:var(--g400);height:4px}
       <div class="rp-title">Верификация</div>
       <div class="vblock">
         <div class="vlabel">Тургенев</div>
-        <div id="tv"><div class="vwait">Ожидание</div></div>
+        <div id="tv"><div class="vwait">ожидание</div></div>
       </div>
       <div class="vblock">
         <div class="vlabel">Advego Антиплагиат</div>
-        <div id="av"><div class="vwait">Ожидание</div></div>
+        <div id="av"><div class="vwait">ожидание</div></div>
       </div>
     </aside>
 
   </div>
 </div>
 
-<!-- ══ SETTINGS MODAL ══════════════════════════════════════════════════════ -->
+<!-- ══ SETTINGS MODAL ════════════════════════════════════════════════════ -->
 <div class="overlay" id="overlay">
   <div class="modal">
     <div class="modal-hdr">
-      <span class="modal-title">Настройки</span>
+      <span class="modal-title">⚙ Настройки</span>
       <button class="modal-close" id="modal-close">✕</button>
     </div>
 
     <div class="mf">
-      <label>Модель OpenRouter</label>
+      <label>Языковая модель (OpenRouter)</label>
       <select class="ms" id="m-model">
-        <option value="anthropic/claude-3.5-sonnet">Claude 3.5 Sonnet (рекомендуется)</option>
-        <option value="anthropic/claude-3-opus">Claude 3 Opus</option>
-        <option value="anthropic/claude-sonnet-4-5">Claude Sonnet 4.5</option>
-        <option value="openai/gpt-4o">GPT-4o</option>
-        <option value="openai/gpt-4-turbo">GPT-4 Turbo</option>
-        <option value="google/gemini-pro-1.5">Gemini Pro 1.5</option>
+        <optgroup label="── Claude (Anthropic) ──" class="model-group-label">
+          <option value="anthropic/claude-3.5-sonnet">Claude 3.5 Sonnet ★ рекомендуется</option>
+          <option value="anthropic/claude-3-opus">Claude 3 Opus (наиболее мощный)</option>
+          <option value="anthropic/claude-sonnet-4-5">Claude Sonnet 4.5</option>
+        </optgroup>
+        <optgroup label="── DeepSeek ──">
+          <option value="deepseek/deepseek-v3.2">DeepSeek V3.2 (флагман, 128K)</option>
+          <option value="deepseek/deepseek-chat-v3.1">DeepSeek V3.1 (стабильный)</option>
+          <option value="deepseek/deepseek-r1">DeepSeek R1 (рассуждения)</option>
+          <option value="deepseek/deepseek-r1-0528">DeepSeek R1-0528 (улучшенный)</option>
+          <option value="deepseek/deepseek-r1-distill-qwen-32b">DeepSeek R1 Distill Qwen 32B</option>
+          <option value="deepseek/deepseek-chat-v3.1:free">DeepSeek V3.1 FREE</option>
+        </optgroup>
+        <optgroup label="── Qwen (Alibaba) ──">
+          <option value="qwen/qwen3-235b-a22b">Qwen3 235B A22B (топ)</option>
+          <option value="qwen/qwen3-32b">Qwen3 32B</option>
+          <option value="qwen/qwq-32b">QwQ 32B (рассуждения)</option>
+          <option value="qwen/qwen-2.5-72b-instruct">Qwen 2.5 72B Instruct</option>
+        </optgroup>
+        <optgroup label="── GPT (OpenAI) ──">
+          <option value="openai/gpt-4o">GPT-4o</option>
+          <option value="openai/gpt-4-turbo">GPT-4 Turbo</option>
+          <option value="openai/gpt-4.1">GPT-4.1</option>
+        </optgroup>
+        <optgroup label="── Gemini (Google) ──">
+          <option value="google/gemini-pro-1.5">Gemini Pro 1.5 (1M контекст)</option>
+          <option value="google/gemini-2.0-flash-exp:free">Gemini 2.0 Flash FREE</option>
+        </optgroup>
+        <optgroup label="── Mistral ──">
+          <option value="mistralai/mistral-large">Mistral Large</option>
+          <option value="mistralai/mistral-medium-3">Mistral Medium 3</option>
+        </optgroup>
       </select>
     </div>
 
     <div class="mdivider"></div>
 
+    <div class="mhint">
+      Системный промпт — главные правила для модели: голос клиники, запрещённые слова, структура текста, требования к ключам. Сохраняется в браузере независимо от сессии.
+    </div>
     <div class="mf">
       <label>Системный промпт</label>
-      <div class="mhint">Это главный инструкция для модели — здесь задаются стиль, синтаксис, тон голоса, правила оформления и требования клиники. Оставьте пустым чтобы использовать базовый промпт.</div>
-      <textarea class="mta" id="m-sysprompt" rows="10"
-        placeholder="Пример:
-Ты — медицинский копирайтер клиники «Здоровье». Пиши в тёплом экспертном тоне.
+      <textarea class="mta" id="m-sysprompt" rows="12"
+        placeholder="Ты — медицинский копирайтер клиники «Династия» в Санкт-Петербурге.
 
-СТИЛЬ:
+ГОЛОС КЛИНИКИ:
+— Тёплый, экспертный, без пафоса
+— Конкретные факты вместо общих слов
+
+СТРУКТУРА:
 — Короткие абзацы (2–4 предложения)
-— Заголовки H2 через каждые 300–400 слов
-— Никаких списков без необходимости
-— Живые примеры вместо абстракций
+— H2 каждые 300–400 знаков
+— Списки только если 3+ однородных элемента
 
 ЗАПРЕЩЕНО:
-— «наши специалисты», «индивидуальный подход»
-— Пассивный залог
-— Обещания 100% результата"></textarea>
+— «наши специалисты», «индивидуальный подход», «высококвалифицированный»
+— Пассивный залог в описаниях действий
+— Гарантии результата
+
+ОБЯЗАТЕЛЬНО в каждом тексте:
+— Упоминание районов Санкт-Петербурга из ТЗ
+— Дисклеймер в конце: «Материал носит информационный характер и не заменяет консультацию врача.»
+— Блок FAQ строго из вопросов ТЗ"></textarea>
     </div>
 
     <div class="mdivider"></div>
-    <div class="mhint">API-ключи хранятся в переменных окружения Vercel и никогда не попадают в браузер.</div>
+    <div class="mhint">API-ключи хранятся в переменных окружения Vercel и никогда не передаются в браузер.</div>
 
     <button class="msave" id="m-save">Сохранить настройки</button>
     <div class="msaved" id="m-saved">✓ Сохранено</div>
+  </div>
+</div>
+
+<!-- ══ REFERENCE TEXT MODAL ══════════════════════════════════════════════ -->
+<div id="ref-overlay">
+  <div class="ref-modal">
+    <div class="modal-hdr">
+      <span class="modal-title">📚 Добавить эталонный текст</span>
+      <button class="modal-close" id="ref-modal-close">✕</button>
+    </div>
+    <div class="ref-row">
+      <div class="ref-mf">
+        <label>Название</label>
+        <input class="ref-mi" id="ref-name-inp" placeholder="Напр. «Консультация гастроэнтеролога»"/>
+      </div>
+      <div class="ref-mf" style="width:120px;min-width:120px">
+        <label>Тип текста</label>
+        <input class="ref-mi" id="ref-type-inp" placeholder="НАПРАВЛЕНИЕ"/>
+      </div>
+    </div>
+    <div class="ref-mf">
+      <label>Текст (вставьте готовый верифицированный текст)</label>
+      <textarea class="ref-mta" id="ref-text-inp" rows="10"
+        placeholder="Вставьте верифицированный текст из документа..."></textarea>
+    </div>
+    <div class="ref-mf">
+      <label>Примечание (необязательно)</label>
+      <input class="ref-mi" id="ref-note-inp" placeholder="Например: набрал 7 б. Тургенев, 92% Advego"/>
+    </div>
+    <button class="ref-save" id="ref-save-btn">📌 Сохранить в библиотеку</button>
   </div>
 </div>
 
@@ -410,18 +586,27 @@ input[type=range]{width:100%;accent-color:var(--g400);height:4px}
 // ═══════════════════════════════════════════════════════════════════════
 // STATE
 // ═══════════════════════════════════════════════════════════════════════
+const LS = {
+  get: k    => { try { return JSON.parse(localStorage.getItem(k)) } catch { return null } },
+  set: (k,v) => localStorage.setItem(k, JSON.stringify(v)),
+  str: k    => localStorage.getItem(k) || '',
+  setStr: (k,v) => localStorage.setItem(k, v || ''),
+}
+
 const S = {
-  token:    localStorage.getItem('mc_tok') || '',
-  username: localStorage.getItem('mc_usr') || '',
+  token:    LS.str('mc_tok'),
+  username: LS.str('mc_usr'),
   tasks:    [],
   activeId: null,
-  globalDoc: null,   // parsed text from global xlsx
-  taskDocs:  {},     // taskId → parsed text
-  results:   {},     // taskId → { text, turgenev, advego, done, iterations }
+  globalDoc: null,
+  taskDocs:  {},    // id → raw csv text
+  parsed:    {},    // id → { params, keywords, lsi, rows, selectedRow }
+  results:   {},    // id → { text, turgenev, advego, done }
+  refTexts:  LS.get('mc_refs') || [],   // [{ id, name, type, text, note, active }]
   thresholds: { turgMax:8, advMin:80, maxIter:3 },
   settings: {
-    model:       localStorage.getItem('mc_model')  || 'anthropic/claude-3.5-sonnet',
-    systemPrompt:localStorage.getItem('mc_sysp')   || '',
+    model:       LS.str('mc_model') || 'anthropic/claude-3.5-sonnet',
+    systemPrompt:LS.str('mc_sysp'),
   },
   busy: false,
 }
@@ -443,10 +628,11 @@ function showApp() {
   document.getElementById('pg-login').style.display = 'none'
   document.getElementById('pg-app').classList.add('on')
   document.getElementById('ubadge').textContent = '👤 ' + S.username
-  document.getElementById('m-model').value       = S.settings.model
-  document.getElementById('m-sysprompt').value   = S.settings.systemPrompt
+  document.getElementById('m-model').value     = S.settings.model
+  document.getElementById('m-sysprompt').value = S.settings.systemPrompt
   if (!S.tasks.length) addTask()
   renderTasks()
+  renderRefList()
 }
 
 async function pingAuth() {
@@ -461,7 +647,7 @@ function logout() {
 }
 
 // ═══════════════════════════════════════════════════════════════════════
-// API
+// API helpers
 // ═══════════════════════════════════════════════════════════════════════
 function apiFetch(url, method = 'POST', body = null) {
   const headers = { 'Content-Type': 'application/json' }
@@ -485,50 +671,72 @@ const sleep = ms => new Promise(r => setTimeout(r, ms))
 document.getElementById('lbtn').addEventListener('click', async () => {
   const username = document.getElementById('lu').value.trim()
   const password = document.getElementById('lp').value
-  const errEl    = document.getElementById('lerr')
-  const btn      = document.getElementById('lbtn')
+  const errEl = document.getElementById('lerr')
+  const btn   = document.getElementById('lbtn')
   if (!username || !password) return
   btn.disabled = true; btn.textContent = 'Подождите...'
   errEl.classList.remove('show')
   try {
     const d = await api('/api/auth/login', { username, password })
     S.token = d.access_token; S.username = d.username
-    localStorage.setItem('mc_tok', S.token)
-    localStorage.setItem('mc_usr', S.username)
+    LS.setStr('mc_tok', S.token); LS.setStr('mc_usr', S.username)
     showApp()
   } catch(e) {
     errEl.textContent = e.message; errEl.classList.add('show')
-  } finally {
-    btn.disabled = false; btn.textContent = 'Войти →'
-  }
+  } finally { btn.disabled = false; btn.textContent = 'Войти →' }
 })
 document.getElementById('lp').addEventListener('keydown', e => { if(e.key==='Enter') document.getElementById('lbtn').click() })
 document.getElementById('lu').addEventListener('keydown', e => { if(e.key==='Enter') document.getElementById('lp').focus() })
 document.getElementById('eye').addEventListener('click', () => {
-  const i = document.getElementById('lp'); i.type = i.type === 'password' ? 'text' : 'password'
+  const i = document.getElementById('lp'); i.type = i.type==='password' ? 'text' : 'password'
 })
 document.getElementById('logout-btn').addEventListener('click', logout)
 
 // ═══════════════════════════════════════════════════════════════════════
-// EXCEL PARSING (SheetJS — браузер, ничего не уходит)
+// EXCEL PARSING
 // ═══════════════════════════════════════════════════════════════════════
 function parseXlsx(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader()
-    reader.onload = e => {
+  return new Promise((res, rej) => {
+    const r = new FileReader()
+    r.onload = e => {
       try {
-        const wb    = XLSX.read(e.target.result, { type:'array' })
-        const parts = []
+        const wb = XLSX.read(e.target.result, { type:'array' })
+        const out = []
         wb.SheetNames.forEach(name => {
-          const csv = XLSX.utils.sheet_to_csv(wb.Sheets[name], { skipHidden:true })
-          if (csv.replace(/,+|\s/g,'')) parts.push(`=== Лист: ${name} ===\n${csv}`)
+          const rows = XLSX.utils.sheet_to_json(wb.Sheets[name], { header:1, defval:'' })
+          out.push({ sheetName: name, rows })
         })
-        resolve(parts.join('\n\n'))
-      } catch(e) { reject(e) }
+        res(out)
+      } catch(e) { rej(e) }
     }
-    reader.onerror = () => reject(new Error('Ошибка чтения файла'))
-    reader.readAsArrayBuffer(file)
+    r.onerror = () => rej(new Error('Ошибка чтения файла'))
+    r.readAsArrayBuffer(file)
   })
+}
+
+// Convert sheets to raw CSV text (for LLM context)
+function sheetsToText(sheets) {
+  return sheets.map(s => `=== Лист: ${s.sheetName} ===\n${s.rows.map(r=>r.join('\t')).join('\n')}`).join('\n\n')
+}
+
+// Parse TZ params from sheets
+function parseTZParams(sheets) {
+  // Try to detect rows, keywords, LSI from common patterns
+  const allText = sheetsToText(sheets)
+  
+  // Detect data rows (skip header)
+  const mainSheet = sheets[0]
+  const rows = mainSheet?.rows || []
+  
+  // Find header row (first non-empty row)
+  let headerIdx = rows.findIndex(r => r.some(c => c && String(c).trim()))
+  if (headerIdx === -1) headerIdx = 0
+  const headers = rows[headerIdx] || []
+  
+  // Data rows start after header
+  const dataRows = rows.slice(headerIdx + 1).filter(r => r.some(c => c && String(c).trim()))
+  
+  return { headers, dataRows, rawText: allText, sheets }
 }
 
 function bindDropzone(dropId, inputId, onFile) {
@@ -541,62 +749,197 @@ function bindDropzone(dropId, inputId, onFile) {
   drop.addEventListener('drop', e => { e.preventDefault(); drop.classList.remove('over'); if(e.dataTransfer.files[0]) onFile(e.dataTransfer.files[0]) })
 }
 
-async function loadXlsx(file, dropId, statusId, onSuccess) {
-  const statusEl = document.getElementById(statusId)
-  const dropEl   = document.getElementById(dropId)
-  statusEl.className = 'dz-status dz-loading'
-  statusEl.textContent = '⟳ Читаю файл...'
+async function handleXlsxUpload(file, dropId, statusId, onSuccess) {
+  const stEl = document.getElementById(statusId)
+  const drEl = document.getElementById(dropId)
+  stEl.className = 'dz-status dz-info'
+  stEl.textContent = '⟳ Читаю файл...'
   try {
-    const text = await parseXlsx(file)
-    if (!text.trim()) throw new Error('Файл пустой')
-    const rows = text.split('\n').length
-    statusEl.className = 'dz-status dz-ok'
-    statusEl.textContent = `✓ ${file.name} · ${rows} строк`
-    dropEl.textContent = `📄 ${file.name}`
-    onSuccess(text)
+    const sheets = await parseXlsx(file)
+    const total  = sheets.reduce((n,s) => n + s.rows.length, 0)
+    if (!total) throw new Error('Файл пустой')
+    stEl.className = 'dz-status dz-ok'
+    stEl.textContent = `✓ ${file.name} · ${sheets.length} листов · ${total} строк`
+    drEl.textContent = `📄 ${file.name}`
+    onSuccess(sheets)
   } catch(e) {
-    statusEl.className = 'dz-status dz-err'
-    statusEl.textContent = '✗ ' + e.message
+    stEl.className = 'dz-status dz-err'
+    stEl.textContent = '✗ ' + e.message
   }
 }
 
 // Global xlsx
 bindDropzone('dz-global', 'fi-global', file => {
-  loadXlsx(file, 'dz-global', 'dz-global-status', text => { S.globalDoc = text })
+  handleXlsxUpload(file, 'dz-global', 'dz-global-st', sheets => {
+    S.globalDoc = sheetsToText(sheets)
+  })
 })
 
 // Task xlsx
 bindDropzone('dz-task', 'fi-task', async file => {
   const id = S.activeId
-  await loadXlsx(file, 'dz-task', 'dz-task-status', async text => {
-    S.taskDocs[id] = text
+  await handleXlsxUpload(file, 'dz-task', 'dz-task-st', async sheets => {
+    S.taskDocs[id] = sheetsToText(sheets)
+    const parsed   = parseTZParams(sheets)
+    S.parsed[id]   = { ...parsed, selectedRow: 0, clarification: '' }
     document.getElementById('tz-badge').textContent = '✓ загружено'
     document.getElementById('gen-btn').disabled = false
-    // LLM confirms TZ understanding
-    await confirmTZ(id, text)
+    await renderParsed(id)
   })
 })
 
-async function confirmTZ(taskId, tzText) {
-  const confirm = document.getElementById('tz-confirm')
-  confirm.textContent = '⟳ Читаю ТЗ...'
-  confirm.classList.add('show')
-  try {
-    const context = [
-      S.globalDoc ? `ОБЩЕЕ ТЗ ПРОЕКТА:\n${S.globalDoc}` : '',
-      `ТЗ ЗАДАНИЯ:\n${tzText}`,
-    ].filter(Boolean).join('\n\n')
+// ═══════════════════════════════════════════════════════════════════════
+// TZ PARSED RENDERING
+// ═══════════════════════════════════════════════════════════════════════
+async function renderParsed(taskId) {
+  const p = S.parsed[taskId]
+  if (!p) return
+  
+  document.getElementById('card-parsed').classList.add('show')
+  const body = document.getElementById('parsed-body')
+  body.innerHTML = '<div class="out-generating"><div class="spin spin-g"></div>Анализирую ТЗ...</div>'
 
+  // Ask LLM to extract structured params
+  try {
     const d = await api('/api/chat', {
-      messages: [{ role:'user', content:`Прочитай ТЗ и кратко подтверди что понял его. Перечисли: тему/заголовок, тип текста, ключевые слова, объём, особые требования. Если чего-то не хватает — напиши что именно.\n\n${context}` }],
+      messages: [{ role:'user', content: `Проанализируй ТЗ и верни ТОЛЬКО JSON (без markdown-блоков) следующей структуры:
+{
+  "url": "...",
+  "template": "УСЛУГА или НАПРАВЛЕНИЕ",
+  "topic": "тема страницы",
+  "volume": "объём в знаках",
+  "branches": "список филиалов через запятую",
+  "prices_note": "краткая заметка о ценах",
+  "keywords": [{"word": "...", "freq": N}, ...],
+  "lsi": ["слово1", "слово2", ...],
+  "rows_hint": "количество строк с заданиями в таблице если больше одного, иначе null",
+  "understanding": "2-3 предложения — своими словами о чём этот текст"
+}
+
+Ключевые слова и частоту бери строго из ТЗ, выводи ВСЕ без исключения.
+
+ТЗ:
+${S.globalDoc ? 'ОБЩЕЕ ТЗ:\n'+S.globalDoc+'\n\n' : ''}ТЗ ЗАДАНИЯ:\n${S.taskDocs[taskId]}` }],
       mode: 'confirm_tz',
+      model: S.settings.model,
       systemPrompt: S.settings.systemPrompt || undefined,
     })
-    confirm.textContent = d.reply
+
+    let parsed
+    try {
+      const clean = d.reply.replace(/```json|```/g,'').trim()
+      parsed = JSON.parse(clean)
+    } catch {
+      parsed = null
+    }
+
+    body.innerHTML = buildParsedHTML(parsed, d.reply, p)
+    bindParsedEvents(taskId)
+
   } catch(e) {
-    confirm.textContent = '⚠ Не удалось получить подтверждение: ' + e.message
+    body.innerHTML = `<div style="color:var(--red);font-size:12px;padding:8px">⚠ Ошибка анализа: ${esc(e.message)}</div>`
   }
 }
+
+function buildParsedHTML(parsed, rawReply, p) {
+  if (!parsed) {
+    return `<div style="font-size:12px;color:var(--sec);white-space:pre-wrap">${esc(rawReply)}</div>
+      ${buildClarifyBlock()}`
+  }
+
+  const kws = parsed.keywords || []
+  const lsi  = parsed.lsi || []
+
+  // Params grid
+  const params = [
+    ['URL страницы',    parsed.url        || '—'],
+    ['Тип шаблона',     parsed.template   || '—'],
+    ['Объём',           parsed.volume     || '—'],
+    ['Филиалы',         parsed.branches   || '—'],
+    ['Цены',            parsed.prices_note|| '—'],
+  ]
+
+  const paramsHTML = params.map(([l,v]) => `
+    <div class="tz-param">
+      <div class="tz-param-label">${esc(l)}</div>
+      <div class="tz-param-val">${esc(v)}</div>
+    </div>`).join('')
+
+  const topicHTML = `
+    <div class="tz-param span2">
+      <div class="tz-param-label">Тема</div>
+      <div class="tz-param-val" style="font-size:13px">${esc(parsed.topic || '—')}</div>
+    </div>`
+
+  const understandingHTML = parsed.understanding ? `
+    <div class="tz-param span2" style="background:var(--g50);border-color:var(--g100)">
+      <div class="tz-param-label">Понимание задачи</div>
+      <div class="tz-param-val" style="font-weight:400;font-size:12px;line-height:1.5">${esc(parsed.understanding)}</div>
+    </div>` : ''
+
+  // Keywords table (ALL of them)
+  const kwHTML = kws.length ? `
+    <div class="kw-section">
+      <div class="kw-head">
+        <span class="kw-title">Ключевые слова</span>
+        <span class="kw-count">${kws.length} шт.</span>
+      </div>
+      <table class="kw-table">
+        <thead><tr><th>Ключевое слово</th><th style="text-align:center;width:80px">Частота</th></tr></thead>
+        <tbody>
+          ${kws.map(k => `<tr>
+            <td>${esc(k.word)}</td>
+            <td class="kw-freq">${k.freq}</td>
+          </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>` : ''
+
+  // LSI cloud (ALL of them)
+  const lsiHTML = lsi.length ? `
+    <div class="kw-section">
+      <div class="kw-head">
+        <span class="kw-title">LSI-слова</span>
+        <span class="kw-count">${lsi.length} шт.</span>
+      </div>
+      <div class="lsi-cloud">
+        ${lsi.map(w => `<span class="lsi-tag">${esc(w)}</span>`).join('')}
+      </div>
+    </div>` : ''
+
+  // Store parsed for later use
+  p._parsed = parsed
+
+  return `
+    <div class="tz-params">${topicHTML}${paramsHTML}${understandingHTML}</div>
+    ${kwHTML}
+    ${lsiHTML}
+    ${buildClarifyBlock()}
+  `
+}
+
+function buildClarifyBlock() {
+  return `
+    <div class="clarify-wrap">
+      <div class="clarify-lbl">💬 Уточнения перед генерацией</div>
+      <textarea class="clarify-ta" id="clarify-ta" rows="3"
+        placeholder="Необязательно. Уточните что-либо: «работаем со строкой 3 из таблицы», «акцент на детях», «добавь раздел о цене», «тон строже», «избегай слова "уникальный"»..."></textarea>
+      <div class="clarify-hint">Эти уточнения будут переданы модели вместе с ТЗ при генерации.</div>
+    </div>`
+}
+
+function bindParsedEvents(taskId) {
+  const ta = document.getElementById('clarify-ta')
+  if (ta) ta.addEventListener('input', () => {
+    if (!S.parsed[taskId]) S.parsed[taskId] = {}
+    S.parsed[taskId].clarification = ta.value
+  })
+}
+
+// Re-upload
+document.getElementById('re-upload-btn').addEventListener('click', () => {
+  document.getElementById('fi-task').click()
+})
 
 // ═══════════════════════════════════════════════════════════════════════
 // TASKS
@@ -614,28 +957,45 @@ function setActive(id) {
 
 function removeTask(id) {
   S.tasks = S.tasks.filter(t => t.id !== id)
+  delete S.taskDocs[id]; delete S.parsed[id]; delete S.results[id]
   if (!S.tasks.length) addTask()
   else if (S.activeId === id) { S.activeId = S.tasks[0].id; syncTaskUI() }
   renderTasks()
 }
 
 function syncTaskUI() {
-  // TZ card
   const td = S.taskDocs[S.activeId]
-  const fi = document.getElementById('fi-task')
-  fi.value = ''
-  document.getElementById('dz-task').textContent = td ? '📄 ТЗ загружено' : '📎 Нажмите или перетащите .xlsx файл с ТЗ'
-  document.getElementById('dz-task-status').textContent = ''
-  document.getElementById('dz-task-status').className = 'dz-status'
+  document.getElementById('fi-task').value = ''
+  document.getElementById('dz-task').textContent = td ? '📄 ТЗ загружено' : '📎 Перетащите или нажмите — загрузите Excel .xlsx с ТЗ задания'
+  document.getElementById('dz-task-st').textContent = ''
+  document.getElementById('dz-task-st').className = 'dz-status'
   document.getElementById('tz-badge').textContent = td ? '✓ загружено' : 'не загружено'
   document.getElementById('gen-btn').disabled = !td
-  // Confirm
-  const cfm = document.getElementById('tz-confirm')
-  cfm.textContent = ''; cfm.classList.remove('show')
-  // Output
-  renderOut()
-  resetVerif()
-  clearLog()
+
+  // Parsed card
+  const parsedCard = document.getElementById('card-parsed')
+  if (S.parsed[S.activeId]) {
+    parsedCard.classList.add('show')
+    // Re-render
+    renderParsedCached(S.activeId)
+  } else {
+    parsedCard.classList.remove('show')
+  }
+
+  renderOut(); resetVerif(); clearLog()
+}
+
+function renderParsedCached(taskId) {
+  const p = S.parsed[taskId]
+  if (!p) return
+  const body = document.getElementById('parsed-body')
+  if (p._parsed) {
+    body.innerHTML = buildParsedHTML(p._parsed, '', p)
+    bindParsedEvents(taskId)
+    // Restore clarification
+    const ta = document.getElementById('clarify-ta')
+    if (ta && p.clarification) ta.value = p.clarification
+  }
 }
 
 function renderTasks() {
@@ -643,16 +1003,18 @@ function renderTasks() {
   S.tasks.forEach((t, i) => {
     const d = document.createElement('div')
     d.className = 'ti' + (t.id === S.activeId ? ' on' : '')
-    const name = S.taskDocs[t.id] ? `Задание ${i+1} ✦` : `Задание ${i+1}`
+    const hasTz   = !!S.taskDocs[t.id]
+    const isDone  = !!S.results[t.id]?.done
+    const isBusy  = S.busy && t.id === S.activeId
     d.innerHTML = `
       <div class="ti-inner">
-        <span>📄</span>
-        <span class="ti-name">${esc(name)}</span>
-        ${S.results[t.id]?.done ? '<span class="ti-done">✓</span>' : ''}
-        ${S.busy && t.id === S.activeId ? '<span class="ti-spin">⟳</span>' : ''}
+        <span class="ti-num">${i+1}</span>
+        <span class="ti-name">${hasTz ? '📄' : '◻'} Задание ${i+1}</span>
+        ${isDone ? '<span class="ti-tag ti-tag-done">✓</span>' : ''}
+        ${isBusy ? '<span class="ti-tag ti-tag-spin">⟳</span>' : ''}
       </div>
-      <button class="ti-rm" data-id="${t.id}" title="Удалить">✕</button>`
-    d.addEventListener('click', e => { if (!e.target.closest('.ti-rm')) setActive(t.id) })
+      <button class="ti-rm" title="Удалить">✕</button>`
+    d.addEventListener('click', e => { if(!e.target.closest('.ti-rm')) setActive(t.id) })
     d.querySelector('.ti-rm').addEventListener('click', e => { e.stopPropagation(); removeTask(t.id) })
     el.appendChild(d)
   })
@@ -683,45 +1045,52 @@ document.getElementById('acc-btn').addEventListener('click', () => {
 // GENERATE
 // ═══════════════════════════════════════════════════════════════════════
 document.getElementById('gen-btn').addEventListener('click', () => {
-  const tz = S.taskDocs[S.activeId]
-  if (!tz) return
-  generate(tz)
+  const tz = S.taskDocs[S.activeId]; if (!tz) return
+  const clarify = document.getElementById('clarify-ta')?.value || S.parsed[S.activeId]?.clarification || ''
+  generate(tz, null, clarify)
 })
 
-async function generate(tz, reviseInstruction = null) {
+async function generate(tz, reviseInstruction = null, clarification = '') {
   S.busy = true; renderTasks()
   setGenning()
   hideActionPanel()
   clearLog()
-  log(reviseInstruction ? '🔄 Перерабатываю текст...' : '🔄 Генерирую текст...')
-
+  log(reviseInstruction ? '🔄 Перерабатываю по вашим правкам...' : '🔄 Генерирую текст по ТЗ...')
   const prevText = S.results[S.activeId]?.text
 
-  const userMsg = reviseInstruction
-    ? `Переработай текст. Инструкция: ${reviseInstruction}\n\nТекущий текст:\n${prevText}`
-    : `Напиши текст строго по ТЗ. Верни только готовый текст, без вступлений и комментариев.`
+  // Build active reference texts context
+  const activeRefs = S.refTexts.filter(r => r.active)
+  let refContext = ''
+  if (activeRefs.length) {
+    refContext = '\n\nПРИМЕРЫ ЭТАЛОННЫХ ТЕКСТОВ ДЛЯ ОРИЕНТИРА ПО СТИЛЮ:\n' +
+      activeRefs.map((r,i) => `--- Эталон ${i+1}: ${r.name} (${r.type||'—'}) ---\n${r.text.slice(0,2000)}`).join('\n\n')
+    log(`📚 Подключено эталонных текстов: ${activeRefs.length}`)
+  }
 
-  const context = [
-    S.globalDoc    ? `ОБЩЕЕ ТЗ ПРОЕКТА:\n${S.globalDoc}` : '',
-    `ТЗ ЗАДАНИЯ:\n${tz}`,
-  ].filter(Boolean).join('\n\n')
+  const userMsg = reviseInstruction
+    ? `Переработай текст. Инструкция редактора: ${reviseInstruction}\n\nТекущий текст:\n${prevText}`
+    : [
+        `Напиши текст строго по ТЗ. Верни только готовый текст без вступлений и пояснений.`,
+        clarification ? `\n\nДОПОЛНИТЕЛЬНЫЕ УТОЧНЕНИЯ ОТ РЕДАКТОРА:\n${clarification}` : '',
+        refContext,
+      ].join('')
 
   try {
     const d = await api('/api/chat', {
       messages: [{ role:'user', content: userMsg }],
       mode: reviseInstruction ? 'refine' : 'generate',
+      model: S.settings.model,
       systemPrompt: S.settings.systemPrompt || undefined,
       globalDoc: S.globalDoc || undefined,
       taskDoc: tz,
     })
 
-    const text = d.reply
     if (!S.results[S.activeId]) S.results[S.activeId] = {}
-    S.results[S.activeId].text = text
+    S.results[S.activeId].text = d.reply
     S.results[S.activeId].done = false
     renderOut()
     showActionPanel()
-    log('✓ Текст готов. Проверьте и выберите действие.')
+    log('✓ Текст готов. Проверьте результат и выберите действие.')
 
   } catch(e) {
     log('✗ Ошибка генерации: ' + e.message, true)
@@ -737,18 +1106,16 @@ async function generate(tz, reviseInstruction = null) {
 document.getElementById('revise-btn').addEventListener('click', async () => {
   const instruction = document.getElementById('revise-ta').value.trim()
   if (!instruction) { document.getElementById('revise-ta').focus(); return }
-  const tz = S.taskDocs[S.activeId]
-  if (!tz) return
+  const tz = S.taskDocs[S.activeId]; if (!tz) return
   document.getElementById('revise-ta').value = ''
   await generate(tz, instruction)
 })
 
 // ═══════════════════════════════════════════════════════════════════════
-// VERIFY PIPELINE
+// VERIFY
 // ═══════════════════════════════════════════════════════════════════════
 document.getElementById('verify-btn').addEventListener('click', () => {
-  const text = S.results[S.activeId]?.text
-  if (!text) return
+  const text = S.results[S.activeId]?.text; if (!text) return
   runVerification(text)
 })
 
@@ -757,50 +1124,53 @@ async function runVerification(text) {
   hideActionPanel()
   clearLog()
   resetVerif()
-
   const { turgMax, advMin } = S.thresholds
   const id = S.activeId
 
   try {
-    // ── Turgenev ──────────────────────────────────────────────────────
-    log('🔍 Проверяю в Тургенев...')
+    // ── Turgenev ──
+    log('🔍 Отправляю в Тургенев...')
     setVLoading('tv')
     let turgData
     try {
       turgData = await api('/api/turgenev', { text })
       renderTurg(turgData)
       const pass = turgData.total_risk <= turgMax
-      log(`Тургенев: ${turgData.total_risk} б. (${riskRu(turgData.risk_label)}) — ${pass ? '✓ в норме' : '⚠ выше порога ' + turgMax}`)
-      if (!pass) log(`↳ Рекомендуется переработать текст для снижения риска`)
+      log(pass
+        ? `✓ Тургенев: ${turgData.total_risk} б. (${riskRu(turgData.risk_label)}) — в норме`
+        : `⚠ Тургенев: ${turgData.total_risk} б. — превышает порог ${turgMax}. Рекомендую переработку.`, !pass)
     } catch(e) {
       renderVError('tv', e.message)
-      log('⚠ Тургенев недоступен: ' + e.message, true)
+      log('⚠ Тургенев: ' + e.message, true)
     }
 
-    // ── Advego submit ─────────────────────────────────────────────────
+    // ── Advego ──
     log('🔍 Отправляю в Advego Антиплагиат...')
     setVLoading('av')
     try {
-      const { key } = await api('/api/advego/submit', { text, title: 'Проверка' })
-      log('⏳ Advego проверяет текст (занимает 1–5 минут)...')
+      const { key } = await api('/api/advego/submit', { text, title:'Проверка' })
+      log('⏳ Advego обрабатывает текст (1–5 минут)...')
 
       let advData = null
       for (let i = 0; i < 20; i++) {
         await sleep(30000)
         const check = await api('/api/advego/check', { key })
         if (check.status === 'done') { advData = check; break }
-        log(`⏳ Ожидание ${(i+1)*30}с...`)
+        log(`  ⏳ ${(i+1)*30}с...`)
       }
-      if (!advData) throw new Error('Таймаут 10 минут')
+      if (!advData) throw new Error('Таймаут ожидания (10 мин)')
 
       renderAdv(advData)
       const pass = advData.uniqueness_phrases >= advMin
-      log(`Advego: ${advData.uniqueness_phrases}% по фразам — ${pass ? '✓ уникален' : '⚠ ниже порога ' + advMin + '%'}`)
-      if (!pass) log(`↳ Рекомендуется переработать совпадающие фрагменты`)
+      log(pass
+        ? `✓ Advego: ${advData.uniqueness_phrases}% по фразам — уникален`
+        : `⚠ Advego: ${advData.uniqueness_phrases}% — ниже порога ${advMin}%. Рекомендую переработку.`, !pass)
 
-      S.results[id].advego   = advData
-      S.results[id].turgenev = turgData || null
-      S.results[id].done     = true
+      if (S.results[id]) {
+        S.results[id].advego   = advData
+        S.results[id].turgenev = turgData || null
+        S.results[id].done     = true
+      }
       renderTasks()
 
     } catch(e) {
@@ -808,9 +1178,8 @@ async function runVerification(text) {
       log('⚠ Advego: ' + e.message, true)
     }
 
-    // Показываем панель доработки снова (для возможных правок)
     showActionPanel()
-    log('✅ Проверки завершены.')
+    log('✅ Проверки завершены. При необходимости — доработайте текст.')
 
   } catch(e) {
     log('✗ Критическая ошибка: ' + e.message, true)
@@ -821,13 +1190,12 @@ async function runVerification(text) {
 }
 
 // ═══════════════════════════════════════════════════════════════════════
-// RENDER HELPERS
+// RENDER OUTPUT
 // ═══════════════════════════════════════════════════════════════════════
 function renderOut() {
   const r = S.results[S.activeId] || {}
   const body = document.getElementById('out-body')
   const copy = document.getElementById('copy-btn')
-  const itag = document.getElementById('iter-tag')
   if (r.text) {
     body.innerHTML = `<div class="out-text">${esc(r.text)}</div>`
     copy.style.display = 'flex'
@@ -835,12 +1203,11 @@ function renderOut() {
     body.innerHTML = '<div class="out-empty">📝<br>Загрузите ТЗ и нажмите «Генерировать»</div>'
     copy.style.display = 'none'
   }
-  itag.style.display = 'none'
 }
 
 function setGenning() {
   document.getElementById('out-body').innerHTML =
-    '<div class="out-generating"><div class="spin"></div>Генерирую текст...</div>'
+    '<div class="out-generating"><div class="spin spin-g"></div>Генерирую текст, пожалуйста подождите...</div>'
   document.getElementById('copy-btn').style.display = 'none'
 }
 
@@ -854,9 +1221,8 @@ function hideActionPanel() {
   document.getElementById('action-panel').classList.remove('show')
 }
 
-// Copy
 document.getElementById('copy-btn').addEventListener('click', () => {
-  const text = S.results[S.activeId]?.text || ''; if (!text) return
+  const text = S.results[S.activeId]?.text || ''; if(!text) return
   navigator.clipboard.writeText(text)
   document.getElementById('copy-btn').textContent = '✓ Скопировано'
   setTimeout(() => document.getElementById('copy-btn').textContent = '⎘ Копировать', 2000)
@@ -865,48 +1231,50 @@ document.getElementById('copy-btn').addEventListener('click', () => {
 // ═══════════════════════════════════════════════════════════════════════
 // LOG
 // ═══════════════════════════════════════════════════════════════════════
-function log(msg, isErr = false) {
-  const el = document.getElementById('log-card'); el.style.display = 'block'
+function log(msg, isErr = false, isWarn = false) {
+  const el = document.getElementById('log-wrap'); el.style.display = 'block'
+  const body = document.getElementById('log-body')
   const d = document.createElement('div')
-  d.className = 'log-line' + (isErr ? ' log-err' : '')
+  d.className = 'log-line' + (isErr ? ' log-err' : isWarn ? ' log-warn' : '')
   d.innerHTML = `<span class="log-dot">›</span>${esc(msg)}`
-  el.appendChild(d); el.scrollTop = el.scrollHeight
+  body.appendChild(d); body.scrollTop = body.scrollHeight
 }
 function clearLog() {
-  const el = document.getElementById('log-card'); el.innerHTML = ''; el.style.display = 'none'
+  document.getElementById('log-wrap').style.display = 'none'
+  document.getElementById('log-body').innerHTML = ''
 }
+document.getElementById('log-clear-btn').addEventListener('click', clearLog)
 
 // ═══════════════════════════════════════════════════════════════════════
 // VERIFICATION RENDER
 // ═══════════════════════════════════════════════════════════════════════
 function resetVerif() {
-  document.getElementById('tv').innerHTML = '<div class="vwait">Ожидание</div>'
-  document.getElementById('av').innerHTML = '<div class="vwait">Ожидание</div>'
+  document.getElementById('tv').innerHTML = '<div class="vwait">ожидание</div>'
+  document.getElementById('av').innerHTML = '<div class="vwait">ожидание</div>'
 }
-
 function setVLoading(id) {
   document.getElementById(id).innerHTML =
-    '<div class="vloading"><div class="spin" style="width:13px;height:13px;border-width:2px"></div>Проверяю...</div>'
+    '<div class="vloading"><div class="spin spin-g" style="width:12px;height:12px;border-width:2px"></div>проверяю...</div>'
 }
-
 function renderVError(id, msg) {
   document.getElementById(id).innerHTML = `<div class="verr">✗ ${esc(msg)}</div>`
 }
 
-function ring(elId, value, max, color, sublabel, extraRows = '') {
-  const circ = 2 * Math.PI * 27
-  const off  = circ - Math.min(1, value / max) * circ
+function ringChart(elId, value, max, color, sublabel, extraHTML = '') {
+  const circ = 2 * Math.PI * 26
+  const pct  = Math.min(1, (typeof value === 'number' ? value : parseFloat(value)) / max)
+  const off  = circ - pct * circ
   document.getElementById(elId).innerHTML = `
     <div class="ring-wrap">
-      <svg class="ring-svg" viewBox="0 0 66 66">
-        <circle class="ring-bg" cx="33" cy="33" r="27"/>
-        <circle class="ring-fg" cx="33" cy="33" r="27"
-          style="stroke:${color};stroke-dasharray:${circ};stroke-dashoffset:${off}"/>
+      <svg class="ring-svg" viewBox="0 0 62 62">
+        <circle class="ring-bg" cx="31" cy="31" r="26"/>
+        <circle class="ring-fg" cx="31" cy="31" r="26"
+          style="stroke:${color};stroke-dasharray:${circ.toFixed(1)};stroke-dashoffset:${off.toFixed(1)}"/>
       </svg>
       <div class="ring-val" style="color:${color}">${value}</div>
     </div>
     <div class="ring-sub">${sublabel}</div>
-    ${extraRows}`
+    ${extraHTML}`
 }
 
 function renderTurg(d) {
@@ -914,48 +1282,120 @@ function renderTurg(d) {
   const label = d.risk_label
   const color = label==='low' ? 'var(--g400)' : label==='medium' ? 'var(--amber)' : 'var(--red)'
   const dotc  = label==='low' ? 'dg' : label==='medium' ? 'da' : 'dr'
-  const dt    = d.details || {}
-  const rows  = Object.entries({ Повторы:dt.repeats, Стиль:dt.style, Запросы:dt.queries, Вода:dt.water })
+  const det   = d.details || {}
+  const rows  = Object.entries({ Повторы:det.repeats, Стиль:det.style, Запросы:det.queries, Вода:det.water })
     .filter(([,v]) => v > 0)
     .map(([k,v]) => `<div class="vrow"><span>${k}</span><span>${(+v).toFixed(1)}</span></div>`)
     .join('')
-  ring('tv', risk, 13, color,
+  ringChart('tv', risk, 13, color,
     `<span class="vdot ${dotc}"></span>${riskRu(label)}`,
-    rows + (d.link ? `<div style="text-align:center;margin-top:7px"><a href="${d.link}" target="_blank" style="font-size:10px">Полный отчёт ↗</a></div>` : '')
-  )
+    rows + (d.link ? `<div style="text-align:center;margin-top:6px"><a href="${d.link}" target="_blank" style="font-size:9px">Полный отчёт ↗</a></div>` : ''))
 }
 
 function renderAdv(d) {
-  const u     = d.uniqueness_phrases || 0
-  const thr   = S.thresholds.advMin
+  const u    = d.uniqueness_phrases || 0
+  const thr  = S.thresholds.advMin
   const color = u >= thr ? 'var(--g400)' : u >= thr - 10 ? 'var(--amber)' : 'var(--red)'
   const dotc  = u >= thr ? 'dg' : u >= thr - 10 ? 'da' : 'dr'
   const rows  = [
-    `<div class="vrow"><span>По словам</span><span>${d.uniqueness_words || 0}%</span></div>`,
-    ...(d.sources || []).map(s =>
-      `<div class="vrow" style="font-size:10px"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:120px">${esc(s.url)}</span><span>${s.percent}%</span></div>`)
+    `<div class="vrow"><span>По словам</span><span>${d.uniqueness_words||0}%</span></div>`,
+    ...(d.sources||[]).slice(0,3).map(s =>
+      `<div class="vrow" style="font-size:9px"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:115px;display:block">${esc(s.url)}</span><span>${s.percent}%</span></div>`)
   ].join('')
-  ring('av', u + '%', 100, color,
-    `<span class="vdot ${dotc}"></span>${u >= thr ? 'уникален' : 'низкая'}`,
-    rows
-  )
+  ringChart('av', u + '%', 100, color,
+    `<span class="vdot ${dotc}"></span>${u >= thr ? 'уникален' : 'низкая'}`, rows)
 }
+
+// ═══════════════════════════════════════════════════════════════════════
+// REFERENCE TEXTS
+// ═══════════════════════════════════════════════════════════════════════
+function saveRefs() { LS.set('mc_refs', S.refTexts) }
+
+function renderRefList() {
+  const el = document.getElementById('ref-list'); el.innerHTML = ''
+  if (!S.refTexts.length) {
+    el.innerHTML = '<div style="font-size:10px;color:var(--muted);padding:4px 2px">Нет эталонных текстов</div>'
+    return
+  }
+  S.refTexts.forEach(ref => {
+    const d = document.createElement('div')
+    d.className = 'ref-item' + (ref.active ? ' active' : '')
+    d.innerHTML = `
+      <button class="ref-toggle" data-id="${ref.id}" title="${ref.active ? 'Отключить' : 'Подключить к промпту'}">
+        ${ref.active ? '●' : '○'}
+      </button>
+      <span class="ref-name" title="${esc(ref.name)}">${esc(ref.name)}</span>
+      ${ref.type ? `<span style="font-size:9px;color:var(--muted)">${esc(ref.type)}</span>` : ''}
+      <button class="ref-rm" data-id="${ref.id}" title="Удалить">✕</button>`
+    d.querySelector('.ref-toggle').addEventListener('click', e => {
+      e.stopPropagation()
+      const r = S.refTexts.find(x => x.id == e.target.dataset.id)
+      if (r) { r.active = !r.active; saveRefs(); renderRefList() }
+    })
+    d.querySelector('.ref-rm').addEventListener('click', e => {
+      e.stopPropagation()
+      S.refTexts = S.refTexts.filter(x => x.id != e.target.dataset.id)
+      saveRefs(); renderRefList()
+    })
+    el.appendChild(d)
+  })
+}
+
+// Open modal
+document.getElementById('ref-add-btn').addEventListener('click', () => {
+  document.getElementById('ref-name-inp').value = ''
+  document.getElementById('ref-type-inp').value = ''
+  document.getElementById('ref-text-inp').value = ''
+  document.getElementById('ref-note-inp').value = ''
+  document.getElementById('ref-overlay').classList.add('on')
+})
+document.getElementById('ref-modal-close').addEventListener('click', () =>
+  document.getElementById('ref-overlay').classList.remove('on'))
+document.getElementById('ref-overlay').addEventListener('click', e => {
+  if (e.target === document.getElementById('ref-overlay'))
+    document.getElementById('ref-overlay').classList.remove('on')
+})
+document.getElementById('ref-save-btn').addEventListener('click', () => {
+  const name = document.getElementById('ref-name-inp').value.trim()
+  const text = document.getElementById('ref-text-inp').value.trim()
+  if (!name || !text) { alert('Заполните название и текст'); return }
+  S.refTexts.push({
+    id:   Date.now(),
+    name, text,
+    type: document.getElementById('ref-type-inp').value.trim(),
+    note: document.getElementById('ref-note-inp').value.trim(),
+    active: true,
+  })
+  saveRefs(); renderRefList()
+  document.getElementById('ref-overlay').classList.remove('on')
+})
 
 // ═══════════════════════════════════════════════════════════════════════
 // SETTINGS MODAL
 // ═══════════════════════════════════════════════════════════════════════
-document.getElementById('gear-btn').addEventListener('click', () => document.getElementById('overlay').classList.add('on'))
-document.getElementById('modal-close').addEventListener('click', () => document.getElementById('overlay').classList.remove('on'))
+document.getElementById('gear-btn').addEventListener('click', () =>
+  document.getElementById('overlay').classList.add('on'))
+document.getElementById('modal-close').addEventListener('click', () =>
+  document.getElementById('overlay').classList.remove('on'))
 document.getElementById('overlay').addEventListener('click', e => {
-  if (e.target === document.getElementById('overlay')) document.getElementById('overlay').classList.remove('on')
+  if (e.target === document.getElementById('overlay'))
+    document.getElementById('overlay').classList.remove('on')
 })
+
 document.getElementById('m-save').addEventListener('click', () => {
-  S.settings.model       = document.getElementById('m-model').value
+  S.settings.model        = document.getElementById('m-model').value
   S.settings.systemPrompt = document.getElementById('m-sysprompt').value
-  localStorage.setItem('mc_model', S.settings.model)
-  localStorage.setItem('mc_sysp',  S.settings.systemPrompt)
+  // Persist independently of session
+  LS.setStr('mc_model', S.settings.model)
+  LS.setStr('mc_sysp',  S.settings.systemPrompt)
   const saved = document.getElementById('m-saved')
   saved.classList.add('on'); setTimeout(() => saved.classList.remove('on'), 2500)
+})
+
+// Auto-save system prompt on input (no session dependency)
+document.getElementById('m-sysprompt').addEventListener('input', function() {
+  LS.setStr('mc_sysp', this.value)
+  S.settings.systemPrompt = this.value
 })
 
 // ═══════════════════════════════════════════════════════════════════════
